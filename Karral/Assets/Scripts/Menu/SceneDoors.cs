@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Events;
+using UnityEngine.EventSystems;
 
 public class SceneDoors : MonoBehaviour
 {
     [SerializeField] string scene;
+    [SerializeField] UnityEvent trigger;
 
     private void OnTriggerStay(Collider other)
     {
@@ -13,6 +16,7 @@ public class SceneDoors : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.E))
             {
+                trigger.Invoke();
                 SceneManager.LoadScene(scene);
             }
         }

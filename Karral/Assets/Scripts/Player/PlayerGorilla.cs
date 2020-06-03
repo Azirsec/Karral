@@ -20,7 +20,7 @@ public class PlayerGorilla : MonoBehaviour
 
     float fallMultiplier = 10;
 
-    float carryCapacity = 3.5f;
+    float carryCapacity = 6.5f;
 
     // Update is called once per frame
     void Update()
@@ -75,7 +75,7 @@ public class PlayerGorilla : MonoBehaviour
 
     private void throwBox()
     {
-        heldBox.GetComponent<Rigidbody>().AddForce(new Vector3(faceDirection * strength, strength / 2, 0), ForceMode.Impulse);
+        heldBox.GetComponent<Rigidbody>().AddForce(new Vector3(faceDirection * strength, strength / 4, 0), ForceMode.Impulse);
         throwTimer = 0.1f;
         heldBox = null;
     }

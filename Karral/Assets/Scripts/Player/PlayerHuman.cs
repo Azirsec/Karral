@@ -20,7 +20,7 @@ public class PlayerHuman : MonoBehaviour
 
     float fallMultiplier = 10;
 
-    float carryCapacity = 1.5f;
+    float carryCapacity = 3.5f;
 
     private void Start()
     {
@@ -128,13 +128,6 @@ public class PlayerHuman : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.E))
                 {
                     other.GetComponent<Door>().interact();
-                }
-            }
-            if (other.GetComponent<Animal>() != null)
-            {
-                if (Input.GetKey(KeyCode.E))
-                {
-                    other.GetComponent<Animal>().interact();
                 }
             }
         }

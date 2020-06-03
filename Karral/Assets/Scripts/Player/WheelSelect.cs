@@ -7,16 +7,12 @@ public class WheelSelect : MonoBehaviour
 {
     [SerializeField] Image image;
 
-    [SerializeField] GameObject player;
-
     [SerializeField] PlayerHuman human;
     [SerializeField] PlayerGorilla gorilla;
     [SerializeField] PlayerEagle eagle;
     [SerializeField] PlayerRhino rhino;
     [SerializeField] PlayerMouse mouse;
 
-    
-    
     [SerializeField] Mesh eagleMesh;
     [SerializeField] Mesh rhinoMesh;
     [SerializeField] Mesh mouseMesh;
