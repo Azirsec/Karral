@@ -7,7 +7,8 @@ using UnityEngine.EventSystems;
 
 public class SceneDoors : MonoBehaviour
 {
-    [SerializeField] string scene;
+    [SerializeField] string sceneToLoad;
+    [SerializeField] string currentScene;
     [SerializeField] UnityEvent trigger;
 
     private void OnTriggerStay(Collider other)
@@ -17,7 +18,8 @@ public class SceneDoors : MonoBehaviour
             if (Input.GetKey(KeyCode.E))
             {
                 trigger.Invoke();
-                SceneManager.LoadScene(scene);
+                HubStorage.completeLevel(currentScene);
+                SceneManager.LoadScene(sceneToLoad);
             }
         }
     }

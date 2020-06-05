@@ -14,6 +14,9 @@ public class HubStorage : MonoBehaviour
     [SerializeField] GameObject gorilla1object;
     public static bool gorilla1Complete = false;
 
+    [SerializeField] MovingPlatform gorilla2platform;
+    public static bool gorilla2Complete = false;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -25,6 +28,8 @@ public class HubStorage : MonoBehaviour
         human1object.SetActive(human1Complete);
 
         gorilla1object.SetActive(gorilla1Complete);
+
+        gorilla2platform.enabled = gorilla2Complete;
     }
 
     public void savePlayerPosition(Transform door)
@@ -32,7 +37,7 @@ public class HubStorage : MonoBehaviour
         HubStorage.playerPosition = new Vector3(door.position.x, door.position.y, 0);
     }
 
-    public void completeLevel(string level)
+    public static void completeLevel(string level)
     {
         switch (level)
         {
@@ -42,6 +47,14 @@ public class HubStorage : MonoBehaviour
 
             case "Gorilla 1":
                 HubStorage.gorilla1Complete = true;
+                break;
+            case "Gorilla 2":
+                HubStorage.gorilla2Complete = true;
+                break;
+
+
+
+            default:
                 break;
         }
     }

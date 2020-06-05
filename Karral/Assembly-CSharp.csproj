@@ -70,6 +70,7 @@
     <Compile Include="Assets\Scripts\Interactables\Key.cs" />
     <Compile Include="Assets\Scripts\Menu\HubStorage.cs" />
     <Compile Include="Assets\Scripts\Menu\SceneDoors.cs" />
+    <Compile Include="Assets\Scripts\Moving Objects\MovingPlatform.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerEagle.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerGorilla.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerHuman.cs" />
