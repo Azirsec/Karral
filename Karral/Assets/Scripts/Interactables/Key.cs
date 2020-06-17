@@ -2,15 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum KeyColour
+{
+    red,
+    blue,
+    yellow,
+    green
+}
+
 public class Key : MonoBehaviour
 {
-    [SerializeField] int colour = 0;
+    [SerializeField] KeyColour colour;
 
-    private void OnCollisionEnter(Collision collision)
+    public KeyColour getColour()
     {
-        if (collision.gameObject.GetComponent<Door>() != null)
-        {
-            collision.gameObject.GetComponent<Door>().unlock(gameObject, colour);
-        }
+        return colour;
     }
 }

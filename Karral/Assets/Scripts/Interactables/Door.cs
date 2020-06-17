@@ -26,32 +26,40 @@ public class Door : MonoBehaviour
         }
     }
 
-    public void unlock(GameObject key, int colour)
+    public void unlock(List<KeyColour> keys)
     {
-        switch (colour)
+        if (redLocked && keys.Count >= 1)
         {
-            case 0:
-                if (redLocked)
+            foreach (KeyColour colour in keys.ToArray())
+            {
+                if (colour == KeyColour.red)
                 {
+                    keys.Remove(colour);
                     redLocked = false;
-                    Destroy(key);
                 }
-                break;
-            case 1:
-                if (blueLocked)
-                {
-                    blueLocked = false;
-                    Destroy(key);
-                }
-                break;
-            case 2:
-                if (greenLocked)
-                {
-                    greenLocked = false;
-                    Destroy(key);
-                }
-                break;
+            }
         }
-    
+        if (blueLocked && keys.Count >= 1)
+        {
+            foreach (KeyColour colour in keys.ToArray())
+            {
+                if (colour == KeyColour.blue)
+                {
+                    keys.Remove(colour);
+                    blueLocked = false;
+                }
+            }
+        }
+        if (greenLocked && keys.Count >= 1)
+        {
+            foreach (KeyColour colour in keys.ToArray())
+            {
+                if (colour == KeyColour.green)
+                {
+                    keys.Remove(colour);
+                    greenLocked = false;
+                }
+            }
+        }
     }
 }

@@ -8,19 +8,14 @@ public class PlayerHuman : MonoBehaviour
     int faceDirection = 1;
     [SerializeField] float speed;
     [SerializeField] float jump;
-    [SerializeField] float strength;
 
     [SerializeField] Mesh humanMesh;
 
-    GameObject heldBox;
-
-    float throwTimer = 0.1f;
+    List<KeyColour> heldKeys = new List<KeyColour>();
 
     float jumptimer = 0.1f;
 
     float fallMultiplier = 10;
-
-    float carryCapacity = 3.5f;
 
     private void Start()
     {
@@ -31,7 +26,6 @@ public class PlayerHuman : MonoBehaviour
     void Update()
     {
         basicMovement();
-        updateHeldBox();
     }
 
     void basicMovement()
@@ -61,34 +55,6 @@ public class PlayerHuman : MonoBehaviour
         }
     }
 
-    private void updateHeldBox()
-    {
-        throwTimer -= Time.deltaTime;
-
-        if (heldBox != null)
-        {
-            heldBox.transform.position = transform.position + Vector3.up * 2 + new Vector3(0, heldBox.transform.localScale.y / 2f, 0);
-            heldBox.GetComponent<Rigidbody>().velocity = GetComponent<Rigidbody>().velocity;
-
-            if (Input.GetKeyDown(KeyCode.E) && throwTimer <= 0)
-            {
-                throwBox();
-            }
-        }
-    }
-
-    private void throwBox()
-    {
-        heldBox.GetComponent<Rigidbody>().AddForce(new Vector3(faceDirection * strength, strength / 2, 0), ForceMode.Impulse);
-        throwTimer = 0.1f;
-        heldBox = null;
-    }
-
-    private void dropBox()
-    {
-        heldBox = null;
-    }
-
     private void OnCollisionStay(Collision collision)
     {
         for (int i = 0; i < collision.contactCount; i++)
@@ -100,7 +66,23 @@ public class PlayerHuman : MonoBehaviour
                     Jump();
                 }
             }
+        }
+    }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (enabled)
+        {
+            if (other.GetComponent<Key>() != null)
+            {
+                heldKeys.Add(other.GetComponent<Key>().getColour());
+                Destroy(other.gameObject);
+            }
+
+            if (other.GetComponent<Door>() != null)
+            {
+                other.GetComponent<Door>().unlock(heldKeys);
+            }
         }
     }
 
@@ -108,21 +90,6 @@ public class PlayerHuman : MonoBehaviour
     {
         if (enabled)
         {
-            if (other.GetComponent<Box>() != null && heldBox == null)
-            {
-                if (Input.GetKeyDown(KeyCode.E) && throwTimer < 0)
-                {
-                    if (other.GetComponent<Rigidbody>().mass <= carryCapacity)
-                    {
-                        if (heldBox != null)
-                        {
-                            dropBox();
-                        }
-                        throwTimer = 0.05f;
-                        heldBox = other.gameObject;
-                    }
-                }
-            }
             if (other.GetComponent<Door>() != null)
             {
                 if (Input.GetKeyDown(KeyCode.E))
@@ -143,9 +110,7 @@ public class PlayerHuman : MonoBehaviour
 
     public void Deactivate()
     {
-        dropBox();
         enabled = false;
-        throwTimer = 0.2f;
         jumptimer = 0.1f;
     }
 }
