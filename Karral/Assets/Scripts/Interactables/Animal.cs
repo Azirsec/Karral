@@ -35,8 +35,19 @@ public class Animal : MonoBehaviour
                 GlobalStorage.mouseDNA = true;
                 break;
         }
+    }
 
-        //exit level, return to main menu
-        SceneManager.LoadScene(0);
+    public void OnTriggerStay(Collider other)
+    {
+        if (other.GetComponent<PlayerHuman>() != null)
+        {
+            if (other.GetComponent<PlayerHuman>().enabled)
+            {
+                if (Input.GetKey(KeyCode.E))
+                {
+                    interact();
+                }
+            }
+        }
     }
 }
