@@ -6,15 +6,39 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Menu/Hub.unity
-    guid: dd76aaa3eca48e54194cd6e31fa3d25f
+    path: Assets/Scenes/Menu/Human Hub.unity
+    guid: 1fb712248baddcb44bc235c4bbe508ca
+  - enabled: 1
+    path: Assets/Scenes/Menu/Gorilla Hub.unity
+    guid: 6857156b9616ffa4e8ec1b1fdc26a5ce
   - enabled: 1
     path: Assets/Scenes/Levels/Human/Human 1.unity
     guid: ffcedece63872ad4e886670837787a2f
   - enabled: 1
-    path: Assets/Scenes/Levels/Gorilla 2.unity
-    guid: 3fc71e08abb1ded4fb368b9ddb4a44c5
+    path: Assets/Scenes/Levels/Human/Human 2.unity
+    guid: 80599440d76fb0b42a9723a60d834a65
   - enabled: 1
-    path: Assets/Scenes/Levels/Gorilla 1.unity
-    guid: f11962247cf90de46961832321dfe017
+    path: Assets/Scenes/Levels/Human/Human 3.unity
+    guid: 451e9bf89983792448034e4e449c0a9f
+  - enabled: 1
+    path: Assets/Scenes/Levels/Human/Human 4.unity
+    guid: c22f7531d64505440b8c0b3ed450449b
+  - enabled: 1
+    path: Assets/Scenes/Levels/Human/Human 5.unity
+    guid: 2f13d9e2726984a428cb4e5caef8c57b
+  - enabled: 1
+    path: Assets/Scenes/Levels/Gorilla/Gorilla 1.unity
+    guid: ff767b3fdbe3106489bbf79e366a6d8a
+  - enabled: 1
+    path: Assets/Scenes/Levels/Gorilla/Gorilla 2.unity
+    guid: a38ffada45fdb724285e126e47f31c24
+  - enabled: 1
+    path: Assets/Scenes/Levels/Gorilla/Gorilla 3.unity
+    guid: 8c6af126ce707db4b908175fdebd99ce
+  - enabled: 1
+    path: Assets/Scenes/Levels/Gorilla/Gorilla 4.unity
+    guid: 544cefdd44c0b834eac6d03d0dac665b
+  - enabled: 1
+    path: Assets/Scenes/Levels/Gorilla/Gorilla 5.unity
+    guid: e36abe4514b4e7147b6ef5e7ba92b416
   m_configObjects: {}

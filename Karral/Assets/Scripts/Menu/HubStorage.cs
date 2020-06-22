@@ -1,59 +1,109 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class HubStorage : MonoBehaviour
 {
     [SerializeField] GameObject player;
 
-    public static Vector3 playerPosition;
+    public static Vector3 playerPositionHumanHub;
+    public static Vector3 playerPositionGorillaHub;
 
-    [SerializeField] GameObject human1object;
-    public static bool human1Complete = false;
+    [SerializeField] GameObject[] humanLevelUnlocks = new GameObject[5];
+    public static bool[] humanlevelCompleted = new bool[5];
 
-    [SerializeField] GameObject gorilla1object;
-    public static bool gorilla1Complete = false;
+    [SerializeField] GameObject[] gorillaLevelUnlocks = new GameObject[4];
+    public static bool[] gorillaLevelCompleted = new bool[4];
 
-    [SerializeField] MovingPlatform gorilla2platform;
-    public static bool gorilla2Complete = false;
 
     // Start is called before the first frame update
     void Awake()
     {
-        if (playerPosition != Vector3.zero)
+        if (SceneManager.GetActiveScene().buildIndex == 0)
         {
-            player.transform.position = playerPosition;
+            if (playerPositionHumanHub != Vector3.zero)
+            {
+                player.transform.position = playerPositionHumanHub;
+            }
+
+            for (int i = 0; i < 5; i++)
+            {
+                print(humanlevelCompleted[i]);
+                if (humanLevelUnlocks[i] != null)
+                {
+                    humanLevelUnlocks[i].SetActive(humanlevelCompleted[i]);
+                }
+            }
         }
 
-        human1object.SetActive(human1Complete);
+        if (SceneManager.GetActiveScene().buildIndex == 1)
+        {
+            if (playerPositionGorillaHub != Vector3.zero)
+            {
+                player.transform.position = playerPositionGorillaHub;
+            }
 
-        gorilla1object.SetActive(gorilla1Complete);
-
-        gorilla2platform.enabled = gorilla2Complete;
+            for (int i = 0; i < 5; i++)
+            {
+                if (gorillaLevelUnlocks[i] != null)
+                {
+                    gorillaLevelUnlocks[i].SetActive(gorillaLevelCompleted[i]);
+                }
+            }
+        }
     }
 
-    public void savePlayerPosition(Transform door)
+    public void savePlayerPositionHumanHub(Transform door)
     {
-        HubStorage.playerPosition = new Vector3(door.position.x, door.position.y, 0);
+        HubStorage.playerPositionHumanHub = new Vector3(door.position.x, door.position.y, 0);
     }
 
-    public static void completeLevel(string level)
+    public void savePlayerPositionGorillaHub(Transform door)
+    {
+        HubStorage.playerPositionGorillaHub = new Vector3(door.position.x, door.position.y, 0);
+    }
+
+    public void completeHumanLevel(int level)
     {
         switch (level)
         {
-            case "Human 1":
-                HubStorage.human1Complete = true;
+            case 1:
+                HubStorage.humanlevelCompleted[0] = true;
                 break;
-
-            case "Gorilla 1":
-                HubStorage.gorilla1Complete = true;
+            case 2:
+                HubStorage.humanlevelCompleted[1] = true;
                 break;
-            case "Gorilla 2":
-                HubStorage.gorilla2Complete = true;
+            case 3:
+                HubStorage.humanlevelCompleted[2] = true;
                 break;
+            case 4:
+                HubStorage.humanlevelCompleted[3] = true;
+                break;
+            case 5:
+                HubStorage.humanlevelCompleted[4] = true;
+                break;
+            default:
+                break;
+        }
+    }
 
-
-
+    public void completeGorillaLevel(int level)
+    {
+        switch (level)
+        {
+            case 1:
+                HubStorage.gorillaLevelCompleted[0] = true;
+                break;
+            case 2:
+                HubStorage.gorillaLevelCompleted[1] = true;
+                break;
+            case 3:
+                HubStorage.gorillaLevelCompleted[2] = true;
+                break;
+            case 4:
+                HubStorage.gorillaLevelCompleted[3] = true;
+                break;
             default:
                 break;
         }
