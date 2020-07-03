@@ -46,6 +46,7 @@ public class PlayerHuman : MonoBehaviour
 
         jumptimer -= Time.deltaTime;
     }
+
     private void Jump()
     {
         if (jumptimer <= 0f)
