@@ -2,121 +2,100 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-enum birdState
-{
-    walking,
-    flying
-}
 
 public class PlayerEagle : MonoBehaviour
 {
     float moveDirX;
     float moveDirY;
     [SerializeField] float speed;
-    [SerializeField] float flySpeed;
+    [SerializeField] float flyForce;
+    [SerializeField] float rechargeLength;
+    [SerializeField] float flapDuration;
 
     [SerializeField] Mesh eagleMesh;
 
-    GameObject heldBox;
+    bool flapping = false; // if yes, then bird is in flapping state and will gain upward force
 
-    float throwTimer = 0.1f;
+    float flapTimer = 0; //counts up until exceeding flap duration, bird will go up during this
 
-    float carryCapacity = 0.7f;
+    int maxFlightCharges = 3; // cannot store more than 3 flap charges
+    int currFlightCharges = 3; // if current charges is 0 you can't flap
 
-    birdState currentState;
+    float rechargeTimer = 0; // counts up until recharge time, once it exceeds it player regains one flight charge
+
+    bool grounded = false;
 
     // Update is called once per frame
     void Update()
     {
         basicMovement();
-        updateHeldBox();
+        flight();
     }
 
     void basicMovement()
     {
-        switch (currentState)
+
+        moveDirX = Input.GetAxisRaw("Horizontal");
+
+        GetComponent<Rigidbody>().AddForce(new Vector3(moveDirX * speed, 0, 0), ForceMode.Force);
+
+        if (grounded)
         {
-            case birdState.walking:
-                moveDirX = Input.GetAxisRaw("Horizontal");
+            GetComponent<Rigidbody>().velocity = new Vector3(GetComponent<Rigidbody>().velocity.x * 0.9f, GetComponent<Rigidbody>().velocity.y, 0);
+        }
+        else
+        {
+            GetComponent<Rigidbody>().velocity = new Vector3(GetComponent<Rigidbody>().velocity.x * 0.98f, GetComponent<Rigidbody>().velocity.y, 0);
 
-                GetComponent<Rigidbody>().AddForce(new Vector3(moveDirX * speed, 0, 0), ForceMode.Force);
-
-                GetComponent<Rigidbody>().velocity = new Vector3(GetComponent<Rigidbody>().velocity.x * 0.9f, GetComponent<Rigidbody>().velocity.y, 0);
-
-                break;
-
-            case birdState.flying:
-                moveDirX = Input.GetAxisRaw("Horizontal");
-
-                if (Input.GetKey(KeyCode.Space))
-                {
-                    moveDirY = 1;
-                }
-                else
-                {
-                    moveDirY = 0;
-                }
-
-                GetComponent<Rigidbody>().AddForce(new Vector3(moveDirX * flySpeed, moveDirY * flySpeed, 0), ForceMode.Force);
-
-                GetComponent<Rigidbody>().velocity *= 0.98f;
-                break;
         }
 
+        if (Input.GetKey(KeyCode.Space))
+        {
+            beginFlight();
+        }
     }
 
-    private void updateHeldBox()
+    void flight()
     {
-        throwTimer -= Time.deltaTime;
-
-        if (heldBox != null)
+        if (flapping)
         {
-            heldBox.GetComponent<Rigidbody>().velocity = GetComponent<Rigidbody>().velocity;
+            GetComponent<Rigidbody>().AddForce(new Vector3(0, flyForce, 0), ForceMode.Force);
 
-            switch (currentState)
+            flapTimer += Time.deltaTime;
+
+            if (flapTimer > flapDuration)
             {
-                case birdState.walking:
-                    heldBox.transform.position = transform.position + Vector3.up * 1.2f + new Vector3(0, heldBox.transform.localScale.y / 2f, 0);
-                    break;
-
-                case birdState.flying:
-                    heldBox.transform.position = transform.position - Vector3.up * 1.2f - new Vector3(0, heldBox.transform.localScale.y / 2f, 0);
-                    break;
+                flapTimer = 0;
+                flapping = false;
             }
+        }
 
-            if (Input.GetKeyDown(KeyCode.E) && throwTimer <= 0)
+        if (currFlightCharges < maxFlightCharges)
+        {
+            rechargeTimer += Time.deltaTime;
+            if (rechargeTimer > rechargeLength)
             {
-                dropBox();
+                rechargeTimer = 0;
+                currFlightCharges += 1;
             }
         }
     }
-    private void Jump()
+
+    private void beginFlight()
     {
-        GetComponent<Rigidbody>().AddForce(new Vector3(0, speed * 0.5f, 0), ForceMode.Impulse);
+        if (flapTimer <= 0 && currFlightCharges > 0)
+        {
+            currFlightCharges -= 1;
+            flapping = true;
+        }
     }
 
-    private void dropBox()
-    {
-        if (heldBox != null)
-            heldBox.GetComponent<BoxCollider>().enabled = true;
-        heldBox = null;
-    }
 
     private void OnCollisionStay(Collision collision)
     {
         if (enabled)
         {
-            for (int i = 0; i < collision.contactCount; i++)
-            {
-                if (collision.contacts[i].normal.y > 0.8)
-                {
-                    currentState = birdState.walking;
-                    if (Input.GetKey(KeyCode.Space))
-                    {
-                        Jump();
-                    }
-                }
-            }
+            grounded = true;
         }
     }
 
@@ -124,31 +103,7 @@ public class PlayerEagle : MonoBehaviour
     {
         if (enabled)
         {
-            currentState = birdState.flying;
-        }
-    }
-
-    private void OnTriggerStay(Collider other)
-    {
-        if (enabled)
-        {
-            if (other.GetComponent<Box>() != null && heldBox == null)
-            {
-                if (Input.GetKeyDown(KeyCode.E) && throwTimer < 0)
-                {
-                    if (other.GetComponent<Rigidbody>().mass <= carryCapacity)
-                    {
-                        if (heldBox != null)
-                        {
-                            dropBox();
-                        }
-                        throwTimer = 0.05f;
-                        currentState = birdState.flying;
-                        heldBox = other.gameObject;
-                        heldBox.GetComponent<BoxCollider>().enabled = false;
-                    }
-                }
-            }
+            grounded = false;
         }
     }
 
@@ -161,7 +116,6 @@ public class PlayerEagle : MonoBehaviour
 
     public void Deactivate()
     {
-        dropBox();
         enabled = false;
     }
 }
