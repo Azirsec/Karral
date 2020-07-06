@@ -15,6 +15,9 @@ public class PlayerMouse : MonoBehaviour
 
     float fallMultiplier = 10;
 
+    [SerializeField] Mesh mouseMesh;
+
+
     // Update is called once per frame
     void Update()
     {
@@ -90,6 +93,9 @@ public class PlayerMouse : MonoBehaviour
     public void Activate()
     {
         enabled = true;
+
+        GetComponent<Rigidbody>().mass = 0.5f;
+        GetComponent<MeshFilter>().mesh = mouseMesh;
     }
 
     public void Deactivate()

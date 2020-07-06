@@ -1560,6 +1560,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2146768125}
     m_Modifications:
+    - target: {fileID: 1292196580116406041, guid: f8a6383dcb4dc3b43b1de3c92605fbf9,
+        type: 3}
+      propertyPath: m_Text
+      value: Human Hub
+      objectReference: {fileID: 0}
     - target: {fileID: 6769920839797304472, guid: f8a6383dcb4dc3b43b1de3c92605fbf9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1598,7 +1603,7 @@ PrefabInstance:
     - target: {fileID: 6769920839797304472, guid: f8a6383dcb4dc3b43b1de3c92605fbf9,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6769920839797304472, guid: f8a6383dcb4dc3b43b1de3c92605fbf9,
         type: 3}
@@ -1623,7 +1628,7 @@ PrefabInstance:
     - target: {fileID: 6769920839797304476, guid: f8a6383dcb4dc3b43b1de3c92605fbf9,
         type: 3}
       propertyPath: m_Name
-      value: Scene Change Door (1)
+      value: Scene Change Door
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f8a6383dcb4dc3b43b1de3c92605fbf9, type: 3}
@@ -2509,6 +2514,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2146768125}
     m_Modifications:
+    - target: {fileID: 1292196580116406041, guid: f8a6383dcb4dc3b43b1de3c92605fbf9,
+        type: 3}
+      propertyPath: m_Text
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 6769920839797304472, guid: f8a6383dcb4dc3b43b1de3c92605fbf9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2564,6 +2574,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6769920839797304473, guid: f8a6383dcb4dc3b43b1de3c92605fbf9,
+        type: 3}
+      propertyPath: sceneToLoad
+      value: Gorilla 5
+      objectReference: {fileID: 0}
     - target: {fileID: 6769920839797304476, guid: f8a6383dcb4dc3b43b1de3c92605fbf9,
         type: 3}
       propertyPath: m_Name
@@ -2590,6 +2605,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2146768125}
     m_Modifications:
+    - target: {fileID: 1292196580116406041, guid: f8a6383dcb4dc3b43b1de3c92605fbf9,
+        type: 3}
+      propertyPath: m_Text
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6769920839797304472, guid: f8a6383dcb4dc3b43b1de3c92605fbf9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2644,6 +2664,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6769920839797304473, guid: f8a6383dcb4dc3b43b1de3c92605fbf9,
+        type: 3}
+      propertyPath: sceneToLoad
+      value: Gorilla 3
       objectReference: {fileID: 0}
     - target: {fileID: 6769920839797304476, guid: f8a6383dcb4dc3b43b1de3c92605fbf9,
         type: 3}
@@ -4384,6 +4409,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2146768125}
     m_Modifications:
+    - target: {fileID: 1292196580116406041, guid: f8a6383dcb4dc3b43b1de3c92605fbf9,
+        type: 3}
+      propertyPath: m_Text
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6769920839797304472, guid: f8a6383dcb4dc3b43b1de3c92605fbf9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4438,6 +4468,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6769920839797304473, guid: f8a6383dcb4dc3b43b1de3c92605fbf9,
+        type: 3}
+      propertyPath: sceneToLoad
+      value: Gorilla 2
       objectReference: {fileID: 0}
     - target: {fileID: 6769920839797304476, guid: f8a6383dcb4dc3b43b1de3c92605fbf9,
         type: 3}
@@ -4545,6 +4580,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2146768125}
     m_Modifications:
+    - target: {fileID: 1292196580116406041, guid: f8a6383dcb4dc3b43b1de3c92605fbf9,
+        type: 3}
+      propertyPath: m_Text
+      value: Mouse Hub
+      objectReference: {fileID: 0}
     - target: {fileID: 6769920839797304472, guid: f8a6383dcb4dc3b43b1de3c92605fbf9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4599,6 +4639,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6769920839797304473, guid: f8a6383dcb4dc3b43b1de3c92605fbf9,
+        type: 3}
+      propertyPath: sceneToLoad
+      value: Mouse Hub
       objectReference: {fileID: 0}
     - target: {fileID: 6769920839797304476, guid: f8a6383dcb4dc3b43b1de3c92605fbf9,
         type: 3}
@@ -5192,6 +5237,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2146768125}
     m_Modifications:
+    - target: {fileID: 1292196580116406041, guid: f8a6383dcb4dc3b43b1de3c92605fbf9,
+        type: 3}
+      propertyPath: m_Text
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6769920839797304472, guid: f8a6383dcb4dc3b43b1de3c92605fbf9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5230,7 +5280,7 @@ PrefabInstance:
     - target: {fileID: 6769920839797304472, guid: f8a6383dcb4dc3b43b1de3c92605fbf9,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6769920839797304472, guid: f8a6383dcb4dc3b43b1de3c92605fbf9,
         type: 3}
@@ -5247,10 +5297,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6769920839797304473, guid: f8a6383dcb4dc3b43b1de3c92605fbf9,
+        type: 3}
+      propertyPath: sceneToLoad
+      value: Gorilla 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6769920839797304476, guid: f8a6383dcb4dc3b43b1de3c92605fbf9,
         type: 3}
       propertyPath: m_Name
-      value: Scene Change Door
+      value: Scene Change Door (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f8a6383dcb4dc3b43b1de3c92605fbf9, type: 3}
@@ -5261,6 +5316,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2146768125}
     m_Modifications:
+    - target: {fileID: 1292196580116406041, guid: f8a6383dcb4dc3b43b1de3c92605fbf9,
+        type: 3}
+      propertyPath: m_Text
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 6769920839797304472, guid: f8a6383dcb4dc3b43b1de3c92605fbf9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5315,6 +5375,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6769920839797304473, guid: f8a6383dcb4dc3b43b1de3c92605fbf9,
+        type: 3}
+      propertyPath: sceneToLoad
+      value: Gorilla 4
       objectReference: {fileID: 0}
     - target: {fileID: 6769920839797304476, guid: f8a6383dcb4dc3b43b1de3c92605fbf9,
         type: 3}
@@ -5759,8 +5824,8 @@ Transform:
   - {fileID: 1856996928}
   - {fileID: 1303975420}
   - {fileID: 784212067}
-  - {fileID: 2137234086}
   - {fileID: 401180590}
+  - {fileID: 2137234086}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -66,7 +66,9 @@
     <Compile Include="Assets\Scripts\GlobalStorage.cs" />
     <Compile Include="Assets\Scripts\Interactables\Animal.cs" />
     <Compile Include="Assets\Scripts\Interactables\Box.cs" />
+    <Compile Include="Assets\Scripts\Interactables\DestroyableWall.cs" />
     <Compile Include="Assets\Scripts\Interactables\Door.cs" />
+    <Compile Include="Assets\Scripts\Interactables\EscapeTrigger.cs" />
     <Compile Include="Assets\Scripts\Interactables\Key.cs" />
     <Compile Include="Assets\Scripts\Menu\HubStorage.cs" />
     <Compile Include="Assets\Scripts\Menu\SceneDoors.cs" />

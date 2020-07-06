@@ -5,8 +5,7 @@ using UnityEngine;
 
 public class PlayerEagle : MonoBehaviour
 {
-    float moveDirX;
-    float moveDirY;
+    float moveDir;
     [SerializeField] float speed;
     [SerializeField] float flyForce;
     [SerializeField] float rechargeLength;
@@ -35,9 +34,9 @@ public class PlayerEagle : MonoBehaviour
     void basicMovement()
     {
 
-        moveDirX = Input.GetAxisRaw("Horizontal");
+        moveDir = Input.GetAxisRaw("Horizontal");
 
-        GetComponent<Rigidbody>().AddForce(new Vector3(moveDirX * speed, 0, 0), ForceMode.Force);
+        GetComponent<Rigidbody>().AddForce(new Vector3(moveDir * speed, 0, 0), ForceMode.Force);
 
         if (grounded)
         {
@@ -110,6 +109,7 @@ public class PlayerEagle : MonoBehaviour
     public void Activate()
     {
         enabled = true;
+
         GetComponent<Rigidbody>().mass = 0.5f;
         GetComponent<MeshFilter>().mesh = eagleMesh;
     }
