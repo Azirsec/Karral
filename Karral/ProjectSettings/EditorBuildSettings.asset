@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Menu/Gorilla Hub.unity
     guid: 6857156b9616ffa4e8ec1b1fdc26a5ce
   - enabled: 1
+    path: Assets/Scenes/Menu/Mouse Hub.unity
+    guid: ac518a4c7f1012149b9232f95530cc61
+  - enabled: 1
     path: Assets/Scenes/Levels/Human/Human 1.unity
     guid: ffcedece63872ad4e886670837787a2f
   - enabled: 1

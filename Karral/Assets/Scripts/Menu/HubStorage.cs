@@ -9,12 +9,16 @@ public class HubStorage : MonoBehaviour
 
     public static Vector3 playerPositionHumanHub;
     public static Vector3 playerPositionGorillaHub;
+    public static Vector3 playerPositionMouseHub;
 
     [SerializeField] GameObject[] humanLevelUnlocks = new GameObject[5];
     public static bool[] humanlevelCompleted = new bool[5];
 
     [SerializeField] GameObject[] gorillaLevelUnlocks = new GameObject[4];
     public static bool[] gorillaLevelCompleted = new bool[4];
+
+    [SerializeField] GameObject[] mouseLevelUnlocks = new GameObject[4];
+    public static bool[] mouseLevelCompleted = new bool[4];
 
 
     // Start is called before the first frame update
@@ -44,11 +48,27 @@ public class HubStorage : MonoBehaviour
                 player.transform.position = playerPositionGorillaHub;
             }
 
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 4; i++)
             {
                 if (gorillaLevelUnlocks[i] != null)
                 {
                     gorillaLevelUnlocks[i].SetActive(gorillaLevelCompleted[i]);
+                }
+            }
+        }
+
+        if (SceneManager.GetActiveScene().buildIndex == 2)
+        {
+            if (playerPositionMouseHub != Vector3.zero)
+            {
+                player.transform.position = playerPositionMouseHub;
+            }
+
+            for (int i = 0; i < 4; i++)
+            {
+                if (mouseLevelUnlocks[i] != null)
+                {
+                    mouseLevelUnlocks[i].SetActive(mouseLevelCompleted[i]);
                 }
             }
         }
@@ -62,6 +82,11 @@ public class HubStorage : MonoBehaviour
     public void savePlayerPositionGorillaHub(Transform door)
     {
         HubStorage.playerPositionGorillaHub = new Vector3(door.position.x, door.position.y, 0);
+    }
+
+    public void savePlayerPositionMouseHub(Transform door)
+    {
+        HubStorage.playerPositionMouseHub = new Vector3(door.position.x, door.position.y, 0);
     }
 
     public void completeHumanLevel(int level)
@@ -103,6 +128,27 @@ public class HubStorage : MonoBehaviour
                 break;
             case 4:
                 HubStorage.gorillaLevelCompleted[3] = true;
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void completeMouseLevel(int level)
+    {
+        switch (level)
+        {
+            case 1:
+                HubStorage.mouseLevelCompleted[0] = true;
+                break;
+            case 2:
+                HubStorage.mouseLevelCompleted[1] = true;
+                break;
+            case 3:
+                HubStorage.mouseLevelCompleted[2] = true;
+                break;
+            case 4:
+                HubStorage.mouseLevelCompleted[3] = true;
                 break;
             default:
                 break;

@@ -129,8 +129,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 292dbce609ebe4a4eb151085efd058f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 80
-  jump: 40
+  speed: 100
+  jump: 50
   strength: 10
   gorillaMesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!114 &4502064982007794750
@@ -145,8 +145,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6480ef04ae8965b4ba86f70fded25cf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 4
-  flySpeed: 8
+  speed: 20
+  flyForce: 5
+  rechargeLength: 3
+  flapDuration: 0.75
   eagleMesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!114 &4502064982007794751
 MonoBehaviour:
@@ -160,6 +162,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf34484a51779ed49a1e5de10ecc6e7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 20
+  jumpForce: 40
+  dashForce: 150
+  rhinoMesh: {fileID: -5495902117074765545, guid: 172b77ccd5fc11a498666c34980b4fa2,
+    type: 3}
 --- !u!114 &4502064982007794748
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,6 +179,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce6f5c31dbdd8b140a2b63451263b8eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 25
+  jumpForce: 12
+  mouseMesh: {fileID: 1912213703759168438, guid: 97b797a2eea6a8442889119fd021c340,
+    type: 3}
 --- !u!54 &4502064982007794749
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -249,6 +260,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
