@@ -63,6 +63,8 @@ public class PlayerGorilla : MonoBehaviour
 
         if (heldBox != null)
         {
+            heldBox.GetComponent<BoxCollider>().enabled = false;
+
             heldBox.transform.position = transform.position + Vector3.up * 2 + new Vector3(0, heldBox.transform.localScale.y / 2f, 0);
             heldBox.GetComponent<Rigidbody>().velocity = GetComponent<Rigidbody>().velocity;
 
@@ -77,11 +79,18 @@ public class PlayerGorilla : MonoBehaviour
     {
         heldBox.GetComponent<Rigidbody>().AddForce(new Vector3(faceDirection * strength, strength / 4, 0), ForceMode.Impulse);
         throwTimer = 0.1f;
+        heldBox.GetComponent<BoxCollider>().enabled = true;
+
         heldBox = null;
     }
 
     private void dropBox()
     {
+        if (heldBox != null)
+        {
+            heldBox.GetComponent<BoxCollider>().enabled = true;
+        }
+
         heldBox = null;
     }
 
@@ -135,6 +144,7 @@ public class PlayerGorilla : MonoBehaviour
 
         GetComponent<Rigidbody>().mass = 4;
         GetComponent<MeshFilter>().mesh = gorillaMesh;
+        GetComponent<CapsuleCollider>().height = 2;
     }
 
     public void Deactivate()

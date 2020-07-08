@@ -103,6 +103,7 @@ public class PlayerRhino : MonoBehaviour
 
         GetComponent<Rigidbody>().mass = 8;
         GetComponent<MeshFilter>().mesh = rhinoMesh;
+        GetComponent<CapsuleCollider>().height = 2;
     }
 
     public void Deactivate()

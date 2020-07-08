@@ -11,6 +11,8 @@ public class EscapeTrigger : MonoBehaviour
         if (other.GetComponent<PlayerHuman>() != null)
         {
             doorway.SetActive(false);
+            doorway.GetComponent<MeshRenderer>().enabled = false;
+            doorway.GetComponent<BoxCollider>().enabled = false;
         }
     }
 
@@ -19,6 +21,8 @@ public class EscapeTrigger : MonoBehaviour
         if (other.GetComponent<PlayerHuman>() != null)
         {
             doorway.SetActive(true);
+            doorway.GetComponent<MeshRenderer>().enabled = true;
+            doorway.GetComponent<BoxCollider>().enabled = true;
         }
     }
 }

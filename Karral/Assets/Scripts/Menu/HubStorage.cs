@@ -10,6 +10,8 @@ public class HubStorage : MonoBehaviour
     public static Vector3 playerPositionHumanHub;
     public static Vector3 playerPositionGorillaHub;
     public static Vector3 playerPositionMouseHub;
+    public static Vector3 playerPositionRhinoHub;
+    public static Vector3 playerPositionEagleHub;
 
     [SerializeField] GameObject[] humanLevelUnlocks = new GameObject[5];
     public static bool[] humanlevelCompleted = new bool[5];
@@ -20,6 +22,11 @@ public class HubStorage : MonoBehaviour
     [SerializeField] GameObject[] mouseLevelUnlocks = new GameObject[4];
     public static bool[] mouseLevelCompleted = new bool[4];
 
+    [SerializeField] GameObject[] rhinoLevelUnlocks = new GameObject[4];
+    public static bool[] rhinoLevelCompleted = new bool[4];
+
+    [SerializeField] GameObject[] eagleLevelUnlocks = new GameObject[4];
+    public static bool[] eagleLevelCompleted = new bool[4];
 
     // Start is called before the first frame update
     void Awake()
@@ -72,6 +79,38 @@ public class HubStorage : MonoBehaviour
                 }
             }
         }
+
+        if (SceneManager.GetActiveScene().buildIndex == 3)
+        {
+            if (playerPositionRhinoHub != Vector3.zero)
+            {
+                player.transform.position = playerPositionRhinoHub;
+            }
+
+            for (int i = 0; i < 4; i++)
+            {
+                if (rhinoLevelUnlocks[i] != null)
+                {
+                    rhinoLevelUnlocks[i].SetActive(rhinoLevelCompleted[i]);
+                }
+            }
+        }
+
+        if (SceneManager.GetActiveScene().buildIndex == 4)
+        {
+            if (playerPositionEagleHub != Vector3.zero)
+            {
+                player.transform.position = playerPositionEagleHub;
+            }
+
+            for (int i = 0; i < 4; i++)
+            {
+                if (eagleLevelUnlocks[i] != null)
+                {
+                    eagleLevelUnlocks[i].SetActive(eagleLevelCompleted[i]);
+                }
+            }
+        }
     }
 
     public void savePlayerPositionHumanHub(Transform door)
@@ -87,6 +126,16 @@ public class HubStorage : MonoBehaviour
     public void savePlayerPositionMouseHub(Transform door)
     {
         HubStorage.playerPositionMouseHub = new Vector3(door.position.x, door.position.y, 0);
+    }
+
+    public void savePlayerPositionRhinoHub(Transform door)
+    {
+        HubStorage.playerPositionRhinoHub = new Vector3(door.position.x, door.position.y, 0);
+    }
+
+    public void savePlayerPositionEagleHub(Transform door)
+    {
+        HubStorage.playerPositionEagleHub = new Vector3(door.position.x, door.position.y, 0);
     }
 
     public void completeHumanLevel(int level)
@@ -149,6 +198,48 @@ public class HubStorage : MonoBehaviour
                 break;
             case 4:
                 HubStorage.mouseLevelCompleted[3] = true;
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void completeRhinoLevel(int level)
+    {
+        switch (level)
+        {
+            case 1:
+                HubStorage.rhinoLevelCompleted[0] = true;
+                break;
+            case 2:
+                HubStorage.rhinoLevelCompleted[1] = true;
+                break;
+            case 3:
+                HubStorage.rhinoLevelCompleted[2] = true;
+                break;
+            case 4:
+                HubStorage.rhinoLevelCompleted[3] = true;
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void completeEagleLevel(int level)
+    {
+        switch (level)
+        {
+            case 1:
+                HubStorage.eagleLevelCompleted[0] = true;
+                break;
+            case 2:
+                HubStorage.eagleLevelCompleted[1] = true;
+                break;
+            case 3:
+                HubStorage.eagleLevelCompleted[2] = true;
+                break;
+            case 4:
+                HubStorage.eagleLevelCompleted[3] = true;
                 break;
             default:
                 break;

@@ -107,6 +107,7 @@ public class PlayerHuman : MonoBehaviour
 
         GetComponent<Rigidbody>().mass = 1;
         GetComponent<MeshFilter>().mesh = humanMesh;
+        GetComponent<CapsuleCollider>().height = 2;
     }
 
     public void Deactivate()

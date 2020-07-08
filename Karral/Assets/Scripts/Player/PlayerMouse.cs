@@ -96,6 +96,7 @@ public class PlayerMouse : MonoBehaviour
 
         GetComponent<Rigidbody>().mass = 0.5f;
         GetComponent<MeshFilter>().mesh = mouseMesh;
+        GetComponent<CapsuleCollider>().height = 1;
     }
 
     public void Deactivate()

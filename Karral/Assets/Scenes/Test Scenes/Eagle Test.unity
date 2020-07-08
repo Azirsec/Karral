@@ -564,6 +564,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 4502064982007794749, guid: 9bb74a6b958c1c941a3639bca3e758af,
+        type: 3}
+      propertyPath: m_Mass
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 4502064982007794750, guid: 9bb74a6b958c1c941a3639bca3e758af,
         type: 3}
       propertyPath: m_Enabled
@@ -572,7 +577,7 @@ PrefabInstance:
     - target: {fileID: 4502064982007794750, guid: 9bb74a6b958c1c941a3639bca3e758af,
         type: 3}
       propertyPath: flyForce
-      value: 5
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 4502064982007794750, guid: 9bb74a6b958c1c941a3639bca3e758af,
         type: 3}
@@ -587,7 +592,7 @@ PrefabInstance:
     - target: {fileID: 4502064982007794750, guid: 9bb74a6b958c1c941a3639bca3e758af,
         type: 3}
       propertyPath: speed
-      value: 20
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9bb74a6b958c1c941a3639bca3e758af, type: 3}

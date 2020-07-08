@@ -5,10 +5,10 @@ using UnityEngine.SceneManagement;
 public class Animal : MonoBehaviour
 {
     [SerializeField] int DNAcode;
-   
+
     public void interact()
     {
-        switch(DNAcode)
+        switch (DNAcode)
         {
             case 0:
                 //human unlock
@@ -21,18 +21,18 @@ public class Animal : MonoBehaviour
                 break;
 
             case 2:
-                //eagle unlock
-                GlobalStorage.eagleDNA = true;
+                //mouse unlock
+                GlobalStorage.mouseDNA = true;
                 break;
 
             case 3:
                 //rhino unlock
                 GlobalStorage.rhinoDNA = true;
                 break;
-
+            
             case 4:
-                //mouse unlock
-                GlobalStorage.mouseDNA = true;
+                //eagle unlock
+                GlobalStorage.eagleDNA = true;
                 break;
         }
     }

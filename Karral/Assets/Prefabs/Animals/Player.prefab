@@ -145,8 +145,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6480ef04ae8965b4ba86f70fded25cf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 20
-  flyForce: 5
+  speed: 10
+  flyForce: 2.5
   rechargeLength: 3
   flapDuration: 0.75
   eagleMesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
@@ -179,10 +179,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce6f5c31dbdd8b140a2b63451263b8eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 25
-  jumpForce: 12
-  mouseMesh: {fileID: 1912213703759168438, guid: 97b797a2eea6a8442889119fd021c340,
-    type: 3}
+  speed: 10
+  jumpForce: 7
+  mouseMesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!54 &4502064982007794749
 Rigidbody:
   m_ObjectHideFlags: 0
