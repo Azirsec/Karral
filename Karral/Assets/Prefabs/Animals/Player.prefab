@@ -165,8 +165,7 @@ MonoBehaviour:
   speed: 20
   jumpForce: 40
   dashForce: 150
-  rhinoMesh: {fileID: -5495902117074765545, guid: 172b77ccd5fc11a498666c34980b4fa2,
-    type: 3}
+  rhinoMesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!114 &4502064982007794748
 MonoBehaviour:
   m_ObjectHideFlags: 0

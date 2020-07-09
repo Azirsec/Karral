@@ -128,13 +128,6 @@ public class PlayerGorilla : MonoBehaviour
                     }
                 }
             }
-            if (other.GetComponent<Door>() != null)
-            {
-                if (Input.GetKeyDown(KeyCode.E))
-                {
-                    other.GetComponent<Door>().interact();
-                }
-            }
         }
     }
 

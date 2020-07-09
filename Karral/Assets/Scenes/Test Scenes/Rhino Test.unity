@@ -417,7 +417,7 @@ PrefabInstance:
     - target: {fileID: 4502064982007794751, guid: 9bb74a6b958c1c941a3639bca3e758af,
         type: 3}
       propertyPath: dashForce
-      value: 150
+      value: 50
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9bb74a6b958c1c941a3639bca3e758af, type: 3}

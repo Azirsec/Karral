@@ -60,7 +60,7 @@ public class PlayerMouse : MonoBehaviour
     {
         if (jumptimer <= 0f)
         {
-            jumpDirection.x = jumpDirection.x * 2;
+            jumpDirection.x = jumpDirection.x * 1.5f;
             GetComponent<Rigidbody>().AddForce(jumpDirection * jumpForce, ForceMode.Impulse);
             jumptimer = 0.1f;
         }
@@ -72,7 +72,7 @@ public class PlayerMouse : MonoBehaviour
         {
             for (int i = 0; i < collision.contactCount; i++)
             {
-                if (Input.GetKey(KeyCode.Space))
+                if (Input.GetKeyDown(KeyCode.Space))
                 {
                     Jump(collision.contacts[i].normal);
                 }

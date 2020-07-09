@@ -33,4 +33,12 @@ public class MovingPlatform : MonoBehaviour
     {
         movementSpeed -= movementSpeed * 2;
     }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.GetComponent<PlayerHuman>() != null)
+        {
+            other.gameObject.GetComponent<Rigidbody>().AddForce(movementSpeed / 10, ForceMode.VelocityChange);
+        }
+    }
 }

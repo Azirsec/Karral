@@ -70,33 +70,32 @@ public class PlayerHuman : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (enabled)
-        {
-            if (other.GetComponent<Key>() != null)
-            {
-                heldKeys.Add(other.GetComponent<Key>().getColour());
-                Destroy(other.gameObject);
-            }
-
-            if (other.GetComponent<Door>() != null)
-            {
-                other.GetComponent<Door>().unlock(heldKeys);
-            }
-        }
-    }
-
     private void OnTriggerStay(Collider other)
     {
         if (enabled)
         {
+            //open and close door
             if (other.GetComponent<Door>() != null)
             {
                 if (Input.GetKeyDown(KeyCode.E))
                 {
                     other.GetComponent<Door>().interact();
                 }
+            }
+
+            //pick up key
+            if (other.GetComponent<Key>() != null)
+            {
+                heldKeys.Add(other.GetComponent<Key>().getColour());
+                other.GetComponentsInChildren<MeshRenderer>()[1].enabled = false;
+                other.GetComponent<SphereCollider>().enabled = false;
+                //Destroy(other.gameObject);
+            }
+
+            //unlock door
+            if (other.GetComponent<Door>() != null)
+            {
+                other.GetComponent<Door>().unlock(heldKeys);
             }
         }
     }

@@ -41,9 +41,14 @@ public class PlayerRhino : MonoBehaviour
 
             GetComponent<Rigidbody>().AddForce(new Vector3(movedir * speed, 0, 0), ForceMode.Force);
 
-            if (Mathf.Abs(GetComponent<Rigidbody>().velocity.x) > 10 || Mathf.Abs(movedir) < 0.2f)
+            if (Mathf.Abs(GetComponent<Rigidbody>().velocity.x) > 10 && dashTimer < 1.5f || Mathf.Abs(movedir) < 0.2f)
             {
                 GetComponent<Rigidbody>().velocity = new Vector3(GetComponent<Rigidbody>().velocity.x * 0.99f, GetComponent<Rigidbody>().velocity.y - fallMultiplier * Time.deltaTime, 0);
+            }
+
+            if (dashTimer > 2.5f)
+            {
+                GetComponent<Rigidbody>().AddForce(Vector3.right * faceDirection * dashForce, ForceMode.Force);
             }
         }
 
@@ -69,7 +74,6 @@ public class PlayerRhino : MonoBehaviour
     {
         if (dashTimer <= 0f)
         {
-            GetComponent<Rigidbody>().AddForce(Vector3.right * faceDirection * dashForce, ForceMode.Impulse);
             dashTimer = 3f;
         }
     }
