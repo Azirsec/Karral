@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Scenes/Menu/Human Hub.unity
+- path: Assets/Scenes/Levels/Human/Human 5.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
