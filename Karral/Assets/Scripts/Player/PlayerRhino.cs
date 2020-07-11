@@ -13,9 +13,7 @@ public class PlayerRhino : MonoBehaviour
     float jumptimer = 0.1f;
     float dashTimer = 3f;
 
-    float fallMultiplier = 10;
-
-    bool grounded = false;
+    float fallMultiplier = 20;
 
     [SerializeField] Mesh rhinoMesh;
 
@@ -27,29 +25,31 @@ public class PlayerRhino : MonoBehaviour
 
     void basicMovement()
     {
-        if (grounded)
+        movedir = Input.GetAxisRaw("Horizontal");
+        if (movedir > 0)
         {
-            movedir = Input.GetAxisRaw("Horizontal");
-            if (movedir > 0)
-            {
-                faceDirection = 1;
-            }
-            else if (movedir < 0)
-            {
-                faceDirection = -1;
-            }
+            faceDirection = 1;
+        }
+        else if (movedir < 0)
+        {
+            faceDirection = -1;
+        }
 
-            GetComponent<Rigidbody>().AddForce(new Vector3(movedir * speed, 0, 0), ForceMode.Force);
+        GetComponent<Rigidbody>().AddForce(new Vector3(movedir * speed, 0, 0), ForceMode.Force);
 
-            if (Mathf.Abs(GetComponent<Rigidbody>().velocity.x) > 10 && dashTimer < 1.5f || Mathf.Abs(movedir) < 0.2f)
-            {
-                GetComponent<Rigidbody>().velocity = new Vector3(GetComponent<Rigidbody>().velocity.x * 0.99f, GetComponent<Rigidbody>().velocity.y - fallMultiplier * Time.deltaTime, 0);
-            }
+        if (Mathf.Abs(GetComponent<Rigidbody>().velocity.x) > 10 && dashTimer < 1.5f || Mathf.Abs(movedir) < 0.2f)
+        {
+            GetComponent<Rigidbody>().velocity = new Vector3(GetComponent<Rigidbody>().velocity.x * 0.95f, GetComponent<Rigidbody>().velocity.y - fallMultiplier * Time.deltaTime, 0);
+        }
+        else
+        {
+            GetComponent<Rigidbody>().velocity = new Vector3(GetComponent<Rigidbody>().velocity.x, GetComponent<Rigidbody>().velocity.y - fallMultiplier * Time.deltaTime, 0);
 
-            if (dashTimer > 2.5f)
-            {
-                GetComponent<Rigidbody>().AddForce(Vector3.right * faceDirection * dashForce, ForceMode.Force);
-            }
+        }
+
+        if (dashTimer > 2.5f)
+        {
+            GetComponent<Rigidbody>().AddForce(Vector3.right * faceDirection * dashForce, ForceMode.Force);
         }
 
         if (Input.GetKey(KeyCode.LeftShift))
@@ -82,22 +82,16 @@ public class PlayerRhino : MonoBehaviour
     {
         if (enabled)
         {
-            grounded = true;
-
-            if (Input.GetKey(KeyCode.Space))
+            for (int i = 0; i < collision.contactCount; i++)
             {
-                Jump();
+                if (collision.contacts[i].normal.y > 0.8)
+                {
+                    if (Input.GetKey(KeyCode.Space))
+                    {
+                        Jump();
+                    }
+                }
             }
-
-           
-        }
-    }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        if (enabled)
-        {
-            grounded = false;
         }
     }
 

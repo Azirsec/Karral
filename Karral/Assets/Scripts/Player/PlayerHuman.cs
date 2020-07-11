@@ -58,13 +58,16 @@ public class PlayerHuman : MonoBehaviour
 
     private void OnCollisionStay(Collision collision)
     {
-        for (int i = 0; i < collision.contactCount; i++)
+        if (enabled)
         {
-            if (collision.contacts[i].normal.y > 0.8)
+            for (int i = 0; i < collision.contactCount; i++)
             {
-                if (Input.GetKey(KeyCode.Space))
+                if (collision.contacts[i].normal.y > 0.8)
                 {
-                    Jump();
+                    if (Input.GetKey(KeyCode.Space))
+                    {
+                        Jump();
+                    }
                 }
             }
         }

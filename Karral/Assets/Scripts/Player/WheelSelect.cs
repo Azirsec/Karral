@@ -14,10 +14,6 @@ public class WheelSelect : MonoBehaviour
     [SerializeField] PlayerRhino rhino;
     [SerializeField] PlayerMouse mouse;
 
-    [SerializeField] Mesh eagleMesh;
-    [SerializeField] Mesh rhinoMesh;
-    [SerializeField] Mesh mouseMesh;
-
     // Update is called once per frame
     void Update()
     {
@@ -30,7 +26,6 @@ public class WheelSelect : MonoBehaviour
         if (Input.GetMouseButtonUp(1))
         {
             image.enabled = false;
-
             chooseAnimal();
         }
 

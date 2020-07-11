@@ -60,7 +60,7 @@ public class PlayerMouse : MonoBehaviour
     {
         if (jumptimer <= 0f)
         {
-            jumpDirection.x = jumpDirection.x * 1.5f;
+            jumpDirection.x = jumpDirection.x * 1.25f;
             GetComponent<Rigidbody>().AddForce(jumpDirection * jumpForce, ForceMode.Impulse);
             jumptimer = 0.1f;
         }
@@ -83,8 +83,8 @@ public class PlayerMouse : MonoBehaviour
                 if (Mathf.Abs(collision.contacts[i].normal.x) > 0.9)
                 {
                     wallwalking = true;
+                    GetComponent<Rigidbody>().AddForce(-collision.contacts[i].normal / 2, ForceMode.Force);
                     GetComponent<Rigidbody>().useGravity = false;
-                    print("hello");
                 }
             }
         }

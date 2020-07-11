@@ -40,7 +40,6 @@ public class HubStorage : MonoBehaviour
 
             for (int i = 0; i < 5; i++)
             {
-                print(humanlevelCompleted[i]);
                 if (humanLevelUnlocks[i] != null)
                 {
                     humanLevelUnlocks[i].SetActive(humanlevelCompleted[i]);
