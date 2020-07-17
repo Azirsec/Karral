@@ -640,7 +640,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  flyForce: 2.5
+  flyForce: 7
   rechargeLength: 3
   flapDuration: 0.75
   eagleMesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}

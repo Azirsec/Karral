@@ -337,7 +337,7 @@ PrefabInstance:
     - target: {fileID: 8199387976425007342, guid: 035048770f043a540aff9bda8d890615,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8199387976425007342, guid: 035048770f043a540aff9bda8d890615,
         type: 3}
@@ -2633,7 +2633,7 @@ GameObject:
   - component: {fileID: 1653933803}
   - component: {fileID: 1653933802}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Mouse
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

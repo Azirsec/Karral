@@ -8,7 +8,7 @@ public class EscapeTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<PlayerHuman>() != null)
+        if (other.GetComponent<PlayerHuman>() != null && doorway != null)
         {
             doorway.SetActive(false);
             doorway.GetComponent<MeshRenderer>().enabled = false;
@@ -18,7 +18,7 @@ public class EscapeTrigger : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.GetComponent<PlayerHuman>() != null)
+        if (other.GetComponent<PlayerHuman>() != null && doorway != null)
         {
             doorway.SetActive(true);
             doorway.GetComponent<MeshRenderer>().enabled = true;

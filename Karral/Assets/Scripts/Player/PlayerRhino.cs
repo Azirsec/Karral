@@ -11,7 +11,7 @@ public class PlayerRhino : MonoBehaviour
     [SerializeField] float dashForce;
 
     float jumptimer = 0.1f;
-    float dashTimer = 3f;
+    float dashTimer = 0f;
 
     float fallMultiplier = 20;
 

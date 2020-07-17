@@ -24,6 +24,10 @@ public class PressurePlate : MonoBehaviour
             plate.transform.position = new Vector3(plate.transform.position.x, startHeight, plate.transform.position.z);
             plate.GetComponent<Rigidbody>().velocity = Vector3.zero;
         }
+        else if (plate.transform.position.y < startHeight - 2)
+        {
+            plate.transform.position = new Vector3(plate.transform.position.x, startHeight - 0.5f, plate.transform.position.z);
+        }
 
         plate.GetComponent<Rigidbody>().AddForce(Vector3.up, ForceMode.Force);
 
