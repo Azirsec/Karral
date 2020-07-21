@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class PlayerGorilla : MonoBehaviour
 {
-    float movedir;
     int faceDirection = 1;
-    [SerializeField] float speed;
-    [SerializeField] float jump;
-    [SerializeField] float strength;
+    [SerializeField] float maxSpeed;
+    [SerializeField] float accelerationDuration;
+    [SerializeField] float decelerationDuration;
+    [SerializeField] float jumpSpeed;
+
+    [SerializeField] float throwVelocity;
 
     [SerializeField] Mesh gorillaMesh;
 
@@ -18,42 +20,41 @@ public class PlayerGorilla : MonoBehaviour
 
     float jumptimer = 0.1f;
 
-    float fallMultiplier = 10;
-
-    float carryCapacity = 6.5f;
+    bool grounded = false;
 
     // Update is called once per frame
     void Update()
     {
-        basicMovement();
-        updateHeldBox();
-    }
-
-    void basicMovement()
-    {
-        movedir = Input.GetAxisRaw("Horizontal");
-        if (movedir > 0)
+        float temp = Input.GetAxisRaw("Horizontal");
+        if (temp > 0)
         {
             faceDirection = 1;
         }
-        else if (movedir < 0)
+        else if (temp < 0)
         {
             faceDirection = -1;
         }
 
-        GetComponent<Rigidbody>().AddForce(new Vector3(movedir * speed, 0, 0), ForceMode.Force);
-
-        GetComponent<Rigidbody>().velocity = new Vector3(GetComponent<Rigidbody>().velocity.x * 0.9f, GetComponent<Rigidbody>().velocity.y - fallMultiplier * Time.deltaTime, 0);
+        GetComponent<BasicMovement>().basicMovement(maxSpeed, accelerationDuration, decelerationDuration);
+        updateHeldBox();
 
         jumptimer -= Time.deltaTime;
+        if (grounded)
+        {
+            Jump();
+        }
     }
 
     private void Jump()
     {
-        if (jumptimer <= 0f)
+        if (Input.GetKey(KeyCode.Space))
         {
-            GetComponent<Rigidbody>().AddForce(new Vector3(0, jump, 0), ForceMode.Impulse);
-            jumptimer = 0.1f;
+            if (jumptimer <= 0f)
+            {
+                grounded = false;
+                GetComponent<Rigidbody>().velocity += new Vector3(0, jumpSpeed, 0);
+                jumptimer = 0.1f;
+            }
         }
     }
 
@@ -77,7 +78,7 @@ public class PlayerGorilla : MonoBehaviour
 
     private void throwBox()
     {
-        heldBox.GetComponent<Rigidbody>().AddForce(new Vector3(faceDirection * strength, strength / 4, 0), ForceMode.Impulse);
+        heldBox.GetComponent<Rigidbody>().velocity += new Vector3(faceDirection * throwVelocity, 0, 0);
         throwTimer = 0.1f;
         heldBox.GetComponent<BoxCollider>().enabled = true;
 
@@ -96,16 +97,23 @@ public class PlayerGorilla : MonoBehaviour
 
     private void OnCollisionStay(Collision collision)
     {
-        for (int i = 0; i < collision.contactCount; i++)
+        if (enabled)
         {
-            if (collision.contacts[i].normal.y > 0.8)
+            for (int i = 0; i < collision.contactCount; i++)
             {
-                if (Input.GetKey(KeyCode.Space))
+                if (collision.contacts[i].normal.y > 0.8)
                 {
-                    Jump();
+                    grounded = true;
                 }
             }
+        }
+    }
 
+    private void OnCollisionExit(Collision collision)
+    {
+        if (enabled)
+        {
+            grounded = false;
         }
     }
 
@@ -117,15 +125,12 @@ public class PlayerGorilla : MonoBehaviour
             {
                 if (Input.GetKeyDown(KeyCode.E) && throwTimer < 0)
                 {
-                    if (other.GetComponent<Rigidbody>().mass <= carryCapacity)
+                    if (heldBox != null)
                     {
-                        if (heldBox != null)
-                        {
-                            dropBox();
-                        }
-                        throwTimer = 0.05f;
-                        heldBox = other.gameObject;
+                        dropBox();
                     }
+                    throwTimer = 0.05f;
+                    heldBox = other.gameObject;
                 }
             }
         }

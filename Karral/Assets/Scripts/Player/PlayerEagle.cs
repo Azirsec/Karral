@@ -94,7 +94,13 @@ public class PlayerEagle : MonoBehaviour
     {
         if (enabled)
         {
-            grounded = true;
+            for (int i = 0; i < collision.contactCount; i++)
+            {
+                if (collision.contacts[i].normal.y >= 0.9f)
+                {
+                    grounded = true;
+                }
+            }
         }
     }
 

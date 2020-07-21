@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class PlayerHuman : MonoBehaviour
 {
-    float movedir;
-    int faceDirection = 1;
-    [SerializeField] float speed;
-    [SerializeField] float jump;
+    [SerializeField] float maxSpeed;
+    [SerializeField] float accelerationDuration;
+    [SerializeField] float decelerationDuration;
+    [SerializeField] float jumpSpeed;
 
     [SerializeField] Mesh humanMesh;
 
@@ -15,7 +15,7 @@ public class PlayerHuman : MonoBehaviour
 
     float jumptimer = 0.1f;
 
-    float fallMultiplier = 10;
+    bool grounded = false;
 
     private void Start()
     {
@@ -25,34 +25,25 @@ public class PlayerHuman : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        basicMovement();
-    }
-
-    void basicMovement()
-    {
-        movedir = Input.GetAxisRaw("Horizontal");
-        if (movedir > 0)
-        {
-            faceDirection = 1;
-        }
-        else if (movedir < 0)
-        {
-            faceDirection = -1;
-        }
-
-        GetComponent<Rigidbody>().AddForce(new Vector3(movedir * speed, 0, 0), ForceMode.Force);
-
-        GetComponent<Rigidbody>().velocity = new Vector3(GetComponent<Rigidbody>().velocity.x * 0.9f, GetComponent<Rigidbody>().velocity.y - fallMultiplier * Time.deltaTime, 0);
-
+        GetComponent<BasicMovement>().basicMovement(maxSpeed, accelerationDuration, decelerationDuration);
         jumptimer -= Time.deltaTime;
+        if (Input.GetKey(KeyCode.Space))
+        {
+            Jump();
+        }
     }
+
+    
 
     private void Jump()
     {
-        if (jumptimer <= 0f)
+        if (grounded)
         {
-            GetComponent<Rigidbody>().AddForce(new Vector3(0, jump, 0), ForceMode.Impulse);
-            jumptimer = 0.1f;
+            if (jumptimer <= 0f)
+            {
+                GetComponent<Rigidbody>().velocity += new Vector3(0, jumpSpeed, 0);
+                jumptimer = 0.1f;
+            }
         }
     }
 
@@ -64,12 +55,17 @@ public class PlayerHuman : MonoBehaviour
             {
                 if (collision.contacts[i].normal.y > 0.8)
                 {
-                    if (Input.GetKey(KeyCode.Space))
-                    {
-                        Jump();
-                    }
+                    grounded = true;
                 }
             }
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (enabled)
+        {
+            grounded = false;
         }
     }
 

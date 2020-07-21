@@ -76,6 +76,7 @@
     <Compile Include="Assets\Scripts\Misc_\DevHacks.cs" />
     <Compile Include="Assets\Scripts\Moving Objects\MovingPlatform.cs" />
     <Compile Include="Assets\Scripts\Moving Objects\PressurePlate.cs" />
+    <Compile Include="Assets\Scripts\Player\BasicMovement.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerEagle.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerGorilla.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerHuman.cs" />
