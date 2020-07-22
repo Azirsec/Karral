@@ -508,9 +508,9 @@ GameObject:
   - component: {fileID: 4502064982007794721}
   - component: {fileID: 4502064982007794726}
   - component: {fileID: 4502064982007794745}
-  - component: {fileID: 4502064982007794750}
-  - component: {fileID: 4502064982007794751}
   - component: {fileID: 4502064982007794748}
+  - component: {fileID: 4502064982007794751}
+  - component: {fileID: 4502064982007794750}
   - component: {fileID: 4502064982007794749}
   - component: {fileID: 7097737046446001449}
   m_Layer: 0
@@ -632,40 +632,6 @@ MonoBehaviour:
   jumpSpeed: 12
   throwVelocity: 6
   gorillaMesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &4502064982007794750
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4502064982007794727}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6480ef04ae8965b4ba86f70fded25cf7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 10
-  flyForce: 7
-  rechargeLength: 3
-  flapDuration: 0.75
-  eagleMesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &4502064982007794751
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4502064982007794727}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf34484a51779ed49a1e5de10ecc6e7c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxSpeed: 25
-  accelerationDuration: 2
-  decelerationDuration: 0.5
-  jumpSpeed: 8
-  rhinoMesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!114 &4502064982007794748
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -683,6 +649,41 @@ MonoBehaviour:
   decelerationDuration: 0.1
   jumpSpeed: 10
   mouseMesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &4502064982007794751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4502064982007794727}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf34484a51779ed49a1e5de10ecc6e7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxSpeed: 25
+  accelerationDuration: 2
+  decelerationDuration: 0.5
+  jumpSpeed: 8
+  rhinoMesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &4502064982007794750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4502064982007794727}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6480ef04ae8965b4ba86f70fded25cf7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxSpeed: 8
+  accelerationDuration: 0.25
+  decelerationDuration: 0.1
+  jumpSpeed: 10
+  totalJumps: 2
+  eagleMesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!54 &4502064982007794749
 Rigidbody:
   m_ObjectHideFlags: 0
