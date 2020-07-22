@@ -25,6 +25,13 @@ public class PlayerGorilla : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        movement();
+        updateHeldBox();
+        Jump();
+    }
+
+    void movement()
+    {
         float temp = Input.GetAxisRaw("Horizontal");
         if (temp > 0)
         {
@@ -36,24 +43,21 @@ public class PlayerGorilla : MonoBehaviour
         }
 
         GetComponent<BasicMovement>().basicMovement(maxSpeed, accelerationDuration, decelerationDuration);
-        updateHeldBox();
-
-        jumptimer -= Time.deltaTime;
-        if (grounded)
-        {
-            Jump();
-        }
     }
 
     private void Jump()
     {
-        if (Input.GetKey(KeyCode.Space))
+        jumptimer -= Time.deltaTime;
+        if (grounded)
         {
-            if (jumptimer <= 0f)
+            if (Input.GetKey(KeyCode.Space))
             {
-                grounded = false;
-                GetComponent<Rigidbody>().velocity += new Vector3(0, jumpSpeed, 0);
-                jumptimer = 0.1f;
+                if (jumptimer <= 0f)
+                {
+                    grounded = false;
+                    GetComponent<Rigidbody>().velocity += new Vector3(0, jumpSpeed, 0);
+                    jumptimer = 0.1f;
+                }
             }
         }
     }

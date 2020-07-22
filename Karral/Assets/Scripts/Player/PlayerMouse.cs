@@ -6,39 +6,28 @@ public class PlayerMouse : MonoBehaviour
 {
     float movedir;
 
-    [SerializeField] float speed;
-    [SerializeField] float jumpForce;
+    [SerializeField] float maxSpeed;
+    [SerializeField] float accelerationDuration;
+    [SerializeField] float decelerationDuration;
+    [SerializeField] float jumpSpeed;
 
     bool wallwalking = false;
 
     float jumptimer = 0.1f;
 
-    float fallMultiplier = 10;
-
     [SerializeField] Mesh mouseMesh;
-
 
     // Update is called once per frame
     void Update()
     {
         if (!wallwalking)
         {
-            basicMovement();
+            GetComponent<BasicMovement>().basicMovement(maxSpeed, accelerationDuration, decelerationDuration);
         }
         else
         {
             wallMovement();
         }
-    }
-
-    void basicMovement()
-    {
-        movedir = Input.GetAxisRaw("Horizontal");
-
-        GetComponent<Rigidbody>().AddForce(new Vector3(movedir * speed, 0, 0), ForceMode.Force);
-
-        GetComponent<Rigidbody>().velocity = new Vector3(GetComponent<Rigidbody>().velocity.x * 0.95f, GetComponent<Rigidbody>().velocity.y - fallMultiplier * Time.deltaTime, 0);
-
         jumptimer -= Time.deltaTime;
     }
 
@@ -46,22 +35,60 @@ public class PlayerMouse : MonoBehaviour
     {
         movedir = Input.GetAxisRaw("Vertical");
 
-        GetComponent<Rigidbody>().AddForce(new Vector3(0, movedir * speed * 4, 0), ForceMode.Force);
+        //trying to move right
+        if (movedir > 0.15f)
+        {
+            // if already moving left, decelerate
+            if (GetComponent<Rigidbody>().velocity.y < 0)
+            {
+                GetComponent<Rigidbody>().velocity += new Vector3(0, maxSpeed / decelerationDuration * Time.deltaTime, 0);
+            }
+            //if not moving left, accelerate
+            else if (GetComponent<Rigidbody>().velocity.y < maxSpeed)
+            {
+                GetComponent<Rigidbody>().velocity += new Vector3(0, maxSpeed / accelerationDuration * Time.deltaTime, 0);
+            }
+        }
+        //trying to move left
+        else if (movedir < -0.15f)
+        {
+            // already moving right, decelerate
+            if (GetComponent<Rigidbody>().velocity.y > 0)
+            {
+                GetComponent<Rigidbody>().velocity -= new Vector3(0, maxSpeed / decelerationDuration * Time.deltaTime, 0);
+            }
+            // already moving left, accelerate
+            else if (GetComponent<Rigidbody>().velocity.y > -maxSpeed)
+            {
+                GetComponent<Rigidbody>().velocity -= new Vector3(0, maxSpeed / accelerationDuration * Time.deltaTime, 0);
+            }
+        }
+        // not trying to move in any direction
+        else
+        {
+            // if already slow, set velocity to 0
+            if (Mathf.Abs(GetComponent<Rigidbody>().velocity.y) < (maxSpeed / decelerationDuration * Time.deltaTime) * 2)
+            {
+                GetComponent<Rigidbody>().velocity = new Vector3(GetComponent<Rigidbody>().velocity.x, 0, 0);
+            }
+            else
+            {
+                // if not slow, slow down
+                GetComponent<Rigidbody>().velocity -= new Vector3(
+                        0,
+                        GetComponent<Rigidbody>().velocity.y / Mathf.Abs(GetComponent<Rigidbody>().velocity.y) *
+                        maxSpeed / decelerationDuration * Time.deltaTime,
+                        0);
+            }
+        }
 
-        GetComponent<Rigidbody>().velocity = new Vector3(GetComponent<Rigidbody>().velocity.x, GetComponent<Rigidbody>().velocity.y * 0.9f, 0);
-
-        wallwalking = false;
-        GetComponent<Rigidbody>().useGravity = true;
-
-        jumptimer -= Time.deltaTime;
     }
 
     private void Jump(Vector3 jumpDirection)
     {
         if (jumptimer <= 0f)
         {
-            jumpDirection.x = jumpDirection.x * 1.25f;
-            GetComponent<Rigidbody>().AddForce(jumpDirection * jumpForce, ForceMode.Impulse);
+            GetComponent<Rigidbody>().velocity += jumpDirection * jumpSpeed;
             jumptimer = 0.1f;
         }
     }
@@ -72,7 +99,7 @@ public class PlayerMouse : MonoBehaviour
         {
             for (int i = 0; i < collision.contactCount; i++)
             {
-                if (Input.GetKeyDown(KeyCode.Space))
+                if (Input.GetKey(KeyCode.Space))
                 {
                     Jump(collision.contacts[i].normal);
                 }
@@ -83,10 +110,19 @@ public class PlayerMouse : MonoBehaviour
                 if (Mathf.Abs(collision.contacts[i].normal.x) > 0.9)
                 {
                     wallwalking = true;
-                    GetComponent<Rigidbody>().AddForce(-collision.contacts[i].normal / 2, ForceMode.Force);
+                    //GetComponent<Rigidbody>().velocity = new Vector3(-collision.contacts[i].normal / 2, ForceMode.Force);
                     GetComponent<Rigidbody>().useGravity = false;
                 }
             }
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (enabled)
+        {
+            wallwalking = false;
+            GetComponent<Rigidbody>().useGravity = true;
         }
     }
 

@@ -661,9 +661,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf34484a51779ed49a1e5de10ecc6e7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 60
-  jumpForce: 80
-  dashForce: 150
+  maxSpeed: 25
+  accelerationDuration: 2
+  decelerationDuration: 0.5
+  jumpSpeed: 8
   rhinoMesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!114 &4502064982007794748
 MonoBehaviour:
@@ -677,8 +678,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce6f5c31dbdd8b140a2b63451263b8eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
-  jumpForce: 7
+  maxSpeed: 10
+  accelerationDuration: 0.25
+  decelerationDuration: 0.1
+  jumpSpeed: 10
   mouseMesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!54 &4502064982007794749
 Rigidbody:

@@ -6,75 +6,39 @@ public class PlayerRhino : MonoBehaviour
 {
     float movedir;
     int faceDirection;
-    [SerializeField] float speed;
-    [SerializeField] float jumpForce;
-    [SerializeField] float dashForce;
+    [SerializeField] float maxSpeed;
+    [SerializeField] float accelerationDuration;
+    [SerializeField] float decelerationDuration;
+    [SerializeField] float jumpSpeed;
 
     float jumptimer = 0.1f;
-    float dashTimer = 0f;
-
-    float fallMultiplier = 20;
 
     [SerializeField] Mesh rhinoMesh;
+
+    bool grounded = false;
 
     // Update is called once per frame
     void Update()
     {
-        basicMovement();
+        GetComponent<BasicMovement>().basicMovement(maxSpeed, accelerationDuration, decelerationDuration);
+        Jump();
     }
 
-    void basicMovement()
-    {
-        movedir = Input.GetAxisRaw("Horizontal");
-        if (movedir > 0)
-        {
-            faceDirection = 1;
-        }
-        else if (movedir < 0)
-        {
-            faceDirection = -1;
-        }
-
-        GetComponent<Rigidbody>().AddForce(new Vector3(movedir * speed, 0, 0), ForceMode.Force);
-
-        if (Mathf.Abs(GetComponent<Rigidbody>().velocity.x) > 10 && dashTimer < 1.5f || Mathf.Abs(movedir) < 0.2f)
-        {
-            GetComponent<Rigidbody>().velocity = new Vector3(GetComponent<Rigidbody>().velocity.x * 0.95f, GetComponent<Rigidbody>().velocity.y - fallMultiplier * Time.deltaTime, 0);
-        }
-        else
-        {
-            GetComponent<Rigidbody>().velocity = new Vector3(GetComponent<Rigidbody>().velocity.x, GetComponent<Rigidbody>().velocity.y - fallMultiplier * Time.deltaTime, 0);
-
-        }
-
-        if (dashTimer > 2.5f)
-        {
-            GetComponent<Rigidbody>().AddForce(Vector3.right * faceDirection * dashForce, ForceMode.Force);
-        }
-
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            Dash();
-        }
-
-        jumptimer -= Time.deltaTime;
-        dashTimer -= Time.deltaTime;
-    }
 
     private void Jump()
     {
-        if (jumptimer <= 0f)
+        jumptimer -= Time.deltaTime;
+        if (grounded)
         {
-            GetComponent<Rigidbody>().AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            jumptimer = 0.1f;
-        }
-    }
-
-    private void Dash()
-    {
-        if (dashTimer <= 0f)
-        {
-            dashTimer = 3f;
+            if (Input.GetKey(KeyCode.Space))
+            {
+                if (jumptimer <= 0f)
+                {
+                    grounded = false;
+                    GetComponent<Rigidbody>().velocity += new Vector3(0, jumpSpeed, 0);
+                    jumptimer = 0.1f;
+                }
+            }
         }
     }
 
@@ -88,10 +52,18 @@ public class PlayerRhino : MonoBehaviour
                 {
                     if (Input.GetKey(KeyCode.Space))
                     {
-                        Jump();
+                        grounded = true;
                     }
                 }
             }
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (enabled)
+        {
+            grounded = false;
         }
     }
 
