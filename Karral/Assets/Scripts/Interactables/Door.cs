@@ -18,12 +18,12 @@ public class Door : MonoBehaviour
             GetComponent<BoxCollider>().enabled = false;
             open = true;
         }
-        else if (open)
-        {
-            GetComponent<MeshRenderer>().enabled = true;
-            GetComponent<BoxCollider>().enabled = true;
-            open = false;
-        }
+       // else if (open)
+       // {
+       //     GetComponent<MeshRenderer>().enabled = true;
+       //     GetComponent<BoxCollider>().enabled = true;
+       //     open = false;
+       // }
     }
 
     public void unlock(List<KeyColour> keys)

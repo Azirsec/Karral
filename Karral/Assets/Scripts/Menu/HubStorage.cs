@@ -26,7 +26,7 @@ public class HubStorage : MonoBehaviour
     public static bool[] rhinoLevelCompleted = new bool[4];
 
     [SerializeField] GameObject[] eagleLevelUnlocks = new GameObject[4];
-    public static bool[] eagleLevelCompleted = new bool[4];
+    public static bool[] eagleLevelCompleted = new bool[4] { false, true, false, false };
 
     // Start is called before the first frame update
     void Awake()
@@ -232,7 +232,7 @@ public class HubStorage : MonoBehaviour
                 HubStorage.eagleLevelCompleted[0] = true;
                 break;
             case 2:
-                HubStorage.eagleLevelCompleted[1] = true;
+                HubStorage.eagleLevelCompleted[1] = false;
                 break;
             case 3:
                 HubStorage.eagleLevelCompleted[2] = true;

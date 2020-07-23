@@ -682,7 +682,7 @@ MonoBehaviour:
   accelerationDuration: 0.25
   decelerationDuration: 0.1
   jumpSpeed: 10
-  totalJumps: 2
+  totalJumps: 3
   eagleMesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!54 &4502064982007794749
 Rigidbody:
