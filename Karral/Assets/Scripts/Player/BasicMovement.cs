@@ -61,11 +61,14 @@ public class BasicMovement : MonoBehaviour
                     currentAnimation = "Left Stop";
                 }
                 // if not slow, slow down
-                GetComponent<Rigidbody>().velocity -= new Vector3(
-                        GetComponent<Rigidbody>().velocity.x / Mathf.Abs(GetComponent<Rigidbody>().velocity.x) *
-                        maxSpeed / decelerationDuration * Time.deltaTime,
-                        0,
-                        0);
+                if (Time.deltaTime != 0)
+                {
+                    GetComponent<Rigidbody>().velocity -= new Vector3(
+                            GetComponent<Rigidbody>().velocity.x / Mathf.Abs(GetComponent<Rigidbody>().velocity.x) *
+                            maxSpeed / decelerationDuration * Time.deltaTime,
+                            0,
+                            0);
+                }
             }
         }
         return currentAnimation;

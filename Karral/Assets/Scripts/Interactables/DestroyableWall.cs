@@ -10,6 +10,7 @@ public class DestroyableWall : MonoBehaviour
     {
         if (collision.impulse.magnitude > destructionForce)
         {
+            collision.gameObject.GetComponent<Rigidbody>().AddForce(-collision.impulse * 0.75f, ForceMode.Impulse);
             Destroy(gameObject);
         }
     }

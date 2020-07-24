@@ -38,7 +38,6 @@ public class PlayerEagle : MonoBehaviour
                 if (!grounded)
                 {
                     currentJumps--;
-                    print(currentJumps);
                 }
 
                 GetComponent<Rigidbody>().velocity = new Vector3(GetComponent<Rigidbody>().velocity.x, jumpSpeed, 0);

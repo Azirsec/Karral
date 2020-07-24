@@ -28,11 +28,6 @@ public class WheelSelect : MonoBehaviour
             image.enabled = false;
             chooseAnimal();
         }
-
-        if (Input.GetKey(KeyCode.R))
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        }
     }
 
     void chooseAnimal()

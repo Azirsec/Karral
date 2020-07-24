@@ -7,6 +7,8 @@ public class HubStorage : MonoBehaviour
 {
     [SerializeField] GameObject player;
 
+    public static int currentHub;
+
     public static Vector3 playerPositionHumanHub;
     public static Vector3 playerPositionGorillaHub;
     public static Vector3 playerPositionMouseHub;
@@ -31,6 +33,8 @@ public class HubStorage : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        currentHub = SceneManager.GetActiveScene().buildIndex;
+
         if (SceneManager.GetActiveScene().buildIndex == 0)
         {
             if (playerPositionHumanHub != Vector3.zero)
