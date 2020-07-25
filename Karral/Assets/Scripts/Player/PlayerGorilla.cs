@@ -16,7 +16,7 @@ public class PlayerGorilla : MonoBehaviour
 
     GameObject heldBox;
 
-    float throwTimer = 0.1f;
+    float throwTimer = 0.3f;
 
     float jumptimer = 0.1f;
 
@@ -83,7 +83,7 @@ public class PlayerGorilla : MonoBehaviour
     private void throwBox()
     {
         heldBox.GetComponent<Rigidbody>().velocity += new Vector3(faceDirection * throwVelocity, 0, 0);
-        throwTimer = 0.1f;
+        throwTimer = 0.3f;
         heldBox.GetComponent<BoxCollider>().enabled = true;
 
         heldBox = null;
@@ -124,12 +124,8 @@ public class PlayerGorilla : MonoBehaviour
         {
             if (other.GetComponent<Box>() != null && heldBox == null)
             {
-                if (Input.GetKeyDown(KeyCode.E) && throwTimer < 0)
+                if (Input.GetKey(KeyCode.E) && throwTimer < 0)
                 {
-                    if (heldBox != null)
-                    {
-                        dropBox();
-                    }
                     throwTimer = 0.05f;
                     heldBox = other.gameObject;
                 }
@@ -150,7 +146,7 @@ public class PlayerGorilla : MonoBehaviour
     {
         dropBox();
         enabled = false;
-        throwTimer = 0.2f;
+        throwTimer = 0.1f;
         jumptimer = 0.1f;
     }
 }

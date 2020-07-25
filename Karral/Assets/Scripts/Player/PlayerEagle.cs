@@ -32,7 +32,7 @@ public class PlayerEagle : MonoBehaviour
         jumptimer -= Time.deltaTime;
         if (Input.GetKey(KeyCode.Space))
         {
-            
+
             if (jumptimer <= 0f && currentJumps > 0)
             {
                 if (!grounded)
@@ -49,15 +49,12 @@ public class PlayerEagle : MonoBehaviour
 
     private void OnCollisionStay(Collision collision)
     {
-        if (enabled)
+        for (int i = 0; i < collision.contactCount; i++)
         {
-            for (int i = 0; i < collision.contactCount; i++)
+            if (collision.contacts[i].normal.y >= 0.9f)
             {
-                if (collision.contacts[i].normal.y >= 0.9f)
-                {
-                    grounded = true;
-                    currentJumps = totalJumps;
-                }
+                grounded = true;
+                currentJumps = totalJumps;
             }
         }
     }
