@@ -74,7 +74,7 @@ public class PlayerEagle : MonoBehaviour
     {
         enabled = true;
 
-        GetComponent<Rigidbody>().mass = 0.5f;
+        GetComponent<Rigidbody>().mass = 0.75f;
         GetComponent<MeshFilter>().mesh = eagleMesh;
         GetComponent<CapsuleCollider>().height = 1.5f;
     }

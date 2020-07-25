@@ -20,11 +20,8 @@ public class PlayerMouse : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!wallwalking)
-        {
-            GetComponent<BasicMovement>().basicMovement(maxSpeed, accelerationDuration, decelerationDuration);
-        }
-        else
+        GetComponent<BasicMovement>().basicMovement(maxSpeed, accelerationDuration, decelerationDuration);
+        if (wallwalking)
         {
             wallMovement();
         }
@@ -110,7 +107,6 @@ public class PlayerMouse : MonoBehaviour
                 if (Mathf.Abs(collision.contacts[i].normal.x) > 0.9)
                 {
                     wallwalking = true;
-                    //GetComponent<Rigidbody>().velocity = new Vector3(-collision.contacts[i].normal / 2, ForceMode.Force);
                     GetComponent<Rigidbody>().useGravity = false;
                 }
             }
@@ -121,16 +117,17 @@ public class PlayerMouse : MonoBehaviour
     {
         if (enabled)
         {
-            wallwalking = false;
             GetComponent<Rigidbody>().useGravity = true;
         }
+
+        wallwalking = false;
     }
 
     public void Activate()
     {
         enabled = true;
 
-        GetComponent<Rigidbody>().mass = 0.5f;
+        GetComponent<Rigidbody>().mass = 0.75f;
         GetComponent<MeshFilter>().mesh = mouseMesh;
         GetComponent<CapsuleCollider>().height = 1;
     }

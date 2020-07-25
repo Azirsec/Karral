@@ -61,10 +61,7 @@ public class PlayerRhino : MonoBehaviour
 
     private void OnCollisionExit(Collision collision)
     {
-        if (enabled)
-        {
-            grounded = false;
-        }
+        grounded = false;
     }
 
     public void Activate()

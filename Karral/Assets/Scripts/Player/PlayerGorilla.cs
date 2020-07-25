@@ -115,10 +115,7 @@ public class PlayerGorilla : MonoBehaviour
 
     private void OnCollisionExit(Collision collision)
     {
-        if (enabled)
-        {
             grounded = false;
-        }
     }
 
     private void OnTriggerStay(Collider other)

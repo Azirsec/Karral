@@ -15,10 +15,13 @@ public class SceneDoors : MonoBehaviour
     {
         if (other.GetComponent<PlayerHuman>() != null)
         {
-            if (Input.GetKey(KeyCode.E))
+            if (other.GetComponent<PlayerHuman>().enabled)
             {
-                trigger.Invoke();
-                SceneManager.LoadScene(sceneToLoad);
+                if (Input.GetKey(KeyCode.E))
+                {
+                    trigger.Invoke();
+                    SceneManager.LoadScene(sceneToLoad);
+                }
             }
         }
     }

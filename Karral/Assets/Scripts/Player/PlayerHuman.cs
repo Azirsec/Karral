@@ -19,7 +19,7 @@ public class PlayerHuman : MonoBehaviour
 
     private void Start()
     {
-        Application.targetFrameRate = 60;
+        //Application.targetFrameRate = 60;
     }
 
     // Update is called once per frame
@@ -63,10 +63,7 @@ public class PlayerHuman : MonoBehaviour
 
     private void OnCollisionExit(Collision collision)
     {
-        if (enabled)
-        {
             grounded = false;
-        }
     }
 
     private void OnTriggerStay(Collider other)

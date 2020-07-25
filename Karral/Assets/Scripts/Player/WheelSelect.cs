@@ -21,12 +21,16 @@ public class WheelSelect : MonoBehaviour
         {
             image.enabled = true;
             GetComponent<RectTransform>().position = Input.mousePosition;
+            Time.timeScale = 0.2f;
+            Time.fixedDeltaTime = Time.timeScale * 0.02f;
         }
 
         if (Input.GetMouseButtonUp(1))
         {
             image.enabled = false;
             chooseAnimal();
+            Time.timeScale = 1;
+            Time.fixedDeltaTime = Time.timeScale * 0.02f;
         }
     }
 
