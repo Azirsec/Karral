@@ -7,7 +7,13 @@ public class HubStorage : MonoBehaviour
 {
     [SerializeField] GameObject player;
 
-    public static int currentHub;
+    public static bool humanDNA = true;
+    public static bool gorillaDNA = false;
+    public static bool eagleDNA = false;
+    public static bool rhinoDNA = false;
+    public static bool mouseDNA = false;
+
+    public static int currentHub = 1;
 
     public static Vector3 playerPositionHumanHub;
     public static Vector3 playerPositionGorillaHub;
@@ -35,7 +41,7 @@ public class HubStorage : MonoBehaviour
     {
         currentHub = SceneManager.GetActiveScene().buildIndex;
 
-        if (SceneManager.GetActiveScene().buildIndex == 0)
+        if (SceneManager.GetActiveScene().buildIndex == 1)
         {
             if (playerPositionHumanHub != Vector3.zero)
             {
@@ -51,7 +57,7 @@ public class HubStorage : MonoBehaviour
             }
         }
 
-        if (SceneManager.GetActiveScene().buildIndex == 1)
+        if (SceneManager.GetActiveScene().buildIndex == 2)
         {
             if (playerPositionGorillaHub != Vector3.zero)
             {
@@ -67,7 +73,7 @@ public class HubStorage : MonoBehaviour
             }
         }
 
-        if (SceneManager.GetActiveScene().buildIndex == 2)
+        if (SceneManager.GetActiveScene().buildIndex == 3)
         {
             if (playerPositionMouseHub != Vector3.zero)
             {
@@ -83,7 +89,7 @@ public class HubStorage : MonoBehaviour
             }
         }
 
-        if (SceneManager.GetActiveScene().buildIndex == 3)
+        if (SceneManager.GetActiveScene().buildIndex == 4)
         {
             if (playerPositionRhinoHub != Vector3.zero)
             {
@@ -99,7 +105,7 @@ public class HubStorage : MonoBehaviour
             }
         }
 
-        if (SceneManager.GetActiveScene().buildIndex == 4)
+        if (SceneManager.GetActiveScene().buildIndex == 5)
         {
             if (playerPositionEagleHub != Vector3.zero)
             {
@@ -247,5 +253,16 @@ public class HubStorage : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    public void saveGame()
+    {
+        SaveFunctions.SaveGame();
+    }
+
+    public void loadGame()
+    {
+        SaveFunctions.LoadGame();
+        SceneManager.LoadScene(currentHub);
     }
 }

@@ -46,7 +46,7 @@ public class WheelSelect : MonoBehaviour
         }
         else if (Mathf.Abs(mouseAng) <= 36)
         {
-            if (GlobalStorage.humanDNA)
+            if (HubStorage.humanDNA)
             {
                 DeactivateAll();
                 human.Activate();
@@ -54,7 +54,7 @@ public class WheelSelect : MonoBehaviour
         }
         else if (mouseAng > 36 && mouseAng <= 108)
         {
-            if (GlobalStorage.gorillaDNA)
+            if (HubStorage.gorillaDNA)
             {
                 DeactivateAll();
                 gorilla.Activate();
@@ -62,7 +62,7 @@ public class WheelSelect : MonoBehaviour
         }
         else if (mouseAng > 108)
         {
-            if (GlobalStorage.eagleDNA)
+            if (HubStorage.eagleDNA)
             {
                 DeactivateAll();
                 eagle.Activate();
@@ -70,7 +70,7 @@ public class WheelSelect : MonoBehaviour
         }
         else if (mouseAng < -36 && mouseAng >= -108)
         {
-            if (GlobalStorage.rhinoDNA)
+            if (HubStorage.rhinoDNA)
             {
                 DeactivateAll();
                 rhino.Activate();
@@ -78,7 +78,7 @@ public class WheelSelect : MonoBehaviour
         }
         else if (mouseAng < -108)
         {
-            if (GlobalStorage.mouseDNA)
+            if (HubStorage.mouseDNA)
             {
                 DeactivateAll();
                 mouse.Activate();

@@ -14,6 +14,10 @@ public class PlayerRhino : MonoBehaviour
     [SerializeField] float decelerationDuration;
     [SerializeField] float jumpSpeed;
 
+    [SerializeField] float weight;
+    [SerializeField] float height;
+    [SerializeField] float width;
+
     float jumptimer = 0.1f;
 
     bool grounded = false;
@@ -51,10 +55,7 @@ public class PlayerRhino : MonoBehaviour
             {
                 if (collision.contacts[i].normal.y > 0.8)
                 {
-                    if (Input.GetKey(KeyCode.Space))
-                    {
-                        grounded = true;
-                    }
+                    grounded = true;
                 }
             }
         }
@@ -69,8 +70,8 @@ public class PlayerRhino : MonoBehaviour
     {
         enabled = true;
 
-        GetComponent<Rigidbody>().mass = 8;
-        GetComponent<CapsuleCollider>().height = 2;
+        GetComponent<Rigidbody>().mass = weight;
+        GetComponent<BoxCollider>().size = new Vector3(width, height, 1);
         mesh.SetActive(true);
     }
 

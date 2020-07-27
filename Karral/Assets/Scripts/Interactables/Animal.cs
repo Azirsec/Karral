@@ -12,27 +12,27 @@ public class Animal : MonoBehaviour
         {
             case 0:
                 //human unlock
-                GlobalStorage.humanDNA = true;
+                HubStorage.humanDNA = true;
                 break;
 
             case 1:
                 //Gorilla unlock
-                GlobalStorage.gorillaDNA = true;
+                HubStorage.gorillaDNA = true;
                 break;
 
             case 2:
                 //mouse unlock
-                GlobalStorage.mouseDNA = true;
+                HubStorage.mouseDNA = true;
                 break;
 
             case 3:
                 //rhino unlock
-                GlobalStorage.rhinoDNA = true;
+                HubStorage.rhinoDNA = true;
                 break;
             
             case 4:
                 //eagle unlock
-                GlobalStorage.eagleDNA = true;
+                HubStorage.eagleDNA = true;
                 break;
         }
     }

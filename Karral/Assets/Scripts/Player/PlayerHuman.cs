@@ -11,6 +11,10 @@ public class PlayerHuman : MonoBehaviour
     [SerializeField] float decelerationDuration;
     [SerializeField] float jumpSpeed;
 
+    [SerializeField] float weight;
+    [SerializeField] float height;
+    [SerializeField] float width;
+
     List<KeyColour> heldKeys = new List<KeyColour>();
 
     float jumptimer = 0.1f;
@@ -73,7 +77,7 @@ public class PlayerHuman : MonoBehaviour
             //open and close door
             if (other.GetComponent<Door>() != null)
             {
-                if (Input.GetKeyDown(KeyCode.E))
+                if (Input.GetKey(KeyCode.E))
                 {
                     other.GetComponent<Door>().interact();
                 }
@@ -100,8 +104,8 @@ public class PlayerHuman : MonoBehaviour
     {
         enabled = true;
 
-        GetComponent<Rigidbody>().mass = 1;
-        GetComponent<CapsuleCollider>().height = 2;
+        GetComponent<Rigidbody>().mass = weight;
+        GetComponent<BoxCollider>().size = new Vector3(width, height, 1);
         mesh.SetActive(true);
     }
 

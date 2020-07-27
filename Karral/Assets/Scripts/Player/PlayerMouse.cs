@@ -13,6 +13,10 @@ public class PlayerMouse : MonoBehaviour
     [SerializeField] float decelerationDuration;
     [SerializeField] float jumpSpeed;
 
+    [SerializeField] float weight;
+    [SerializeField] float height;
+    [SerializeField] float width;
+
     bool wallwalking = false;
 
     float jumptimer = 0.1f;
@@ -132,8 +136,8 @@ public class PlayerMouse : MonoBehaviour
     {
         enabled = true;
 
-        GetComponent<Rigidbody>().mass = 0.75f;
-        GetComponent<CapsuleCollider>().height = 1;
+        GetComponent<Rigidbody>().mass = weight;
+        GetComponent<BoxCollider>().size = new Vector3(width, height, 1);
         mesh.SetActive(true);
     }
 

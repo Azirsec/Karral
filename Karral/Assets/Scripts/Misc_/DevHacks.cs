@@ -6,21 +6,21 @@ public class DevHacks : MonoBehaviour
 {
     public void Gorilla(bool unlock)
     {
-        GlobalStorage.gorillaDNA = unlock;
+        HubStorage.gorillaDNA = unlock;
     }
 
     public void Mouse(bool unlock)
     {
-        GlobalStorage.mouseDNA = unlock;
+        HubStorage.mouseDNA = unlock;
     }
 
     public void Rhino(bool unlock)
     {
-        GlobalStorage.rhinoDNA = unlock;
+        HubStorage.rhinoDNA = unlock;
     }
 
     public void Eagle(bool unlock)
     {
-        GlobalStorage.eagleDNA = unlock;
+        HubStorage.eagleDNA = unlock;
     }
 }

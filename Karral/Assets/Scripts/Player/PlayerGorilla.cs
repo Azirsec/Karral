@@ -15,6 +15,10 @@ public class PlayerGorilla : MonoBehaviour
 
     [SerializeField] float throwVelocity;
 
+    [SerializeField] float weight;
+    [SerializeField] float height;
+    [SerializeField] float width;
+
     GameObject heldBox;
 
     float throwTimer = 0.3f;
@@ -138,8 +142,8 @@ public class PlayerGorilla : MonoBehaviour
     {
         enabled = true;
 
-        GetComponent<Rigidbody>().mass = 4;
-        GetComponent<CapsuleCollider>().height = 2;
+        GetComponent<Rigidbody>().mass = weight;
+        GetComponent<BoxCollider>().size = new Vector3(width, height, 1);
         mesh.SetActive(true);
     }
 

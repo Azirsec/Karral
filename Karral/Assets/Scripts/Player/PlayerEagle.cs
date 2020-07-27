@@ -15,6 +15,10 @@ public class PlayerEagle : MonoBehaviour
     [SerializeField] float jumpSpeed;
     [SerializeField] int totalJumps;
 
+    [SerializeField] float weight;
+    [SerializeField] float height;
+    [SerializeField] float width;
+
     int currentJumps;
 
     float jumptimer = 0f;
@@ -72,8 +76,8 @@ public class PlayerEagle : MonoBehaviour
     {
         enabled = true;
 
-        GetComponent<Rigidbody>().mass = 0.75f;
-        GetComponent<CapsuleCollider>().height = 1.5f;
+        GetComponent<Rigidbody>().mass = weight;
+        GetComponent<BoxCollider>().size = new Vector3(width, height, 1);
         mesh.SetActive(true);
     }
 
