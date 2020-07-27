@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class PlayerHuman : MonoBehaviour
 {
+    [SerializeField] GameObject mesh;
+
     [SerializeField] float maxSpeed;
     [SerializeField] float accelerationDuration;
     [SerializeField] float decelerationDuration;
     [SerializeField] float jumpSpeed;
-
-    [SerializeField] Mesh humanMesh;
 
     List<KeyColour> heldKeys = new List<KeyColour>();
 
@@ -25,7 +25,7 @@ public class PlayerHuman : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GetComponent<BasicMovement>().basicMovement(maxSpeed, accelerationDuration, decelerationDuration);
+        GetComponent<BasicMovement>().basicMovement(maxSpeed, accelerationDuration, decelerationDuration, grounded);
         jumptimer -= Time.deltaTime;
         if (Input.GetKey(KeyCode.Space))
         {
@@ -101,13 +101,14 @@ public class PlayerHuman : MonoBehaviour
         enabled = true;
 
         GetComponent<Rigidbody>().mass = 1;
-        GetComponent<MeshFilter>().mesh = humanMesh;
         GetComponent<CapsuleCollider>().height = 2;
+        mesh.SetActive(true);
     }
 
     public void Deactivate()
     {
         enabled = false;
         jumptimer = 0.1f;
+        mesh.SetActive(false);
     }
 }

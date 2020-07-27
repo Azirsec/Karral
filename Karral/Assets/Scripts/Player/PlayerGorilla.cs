@@ -5,6 +5,9 @@ using UnityEngine;
 public class PlayerGorilla : MonoBehaviour
 {
     int faceDirection = 1;
+
+    [SerializeField] GameObject mesh;
+
     [SerializeField] float maxSpeed;
     [SerializeField] float accelerationDuration;
     [SerializeField] float decelerationDuration;
@@ -12,11 +15,9 @@ public class PlayerGorilla : MonoBehaviour
 
     [SerializeField] float throwVelocity;
 
-    [SerializeField] Mesh gorillaMesh;
-
     GameObject heldBox;
 
-    float throwTimer = 0.1f;
+    float throwTimer = 0.3f;
 
     float jumptimer = 0.1f;
 
@@ -42,7 +43,7 @@ public class PlayerGorilla : MonoBehaviour
             faceDirection = -1;
         }
 
-        GetComponent<BasicMovement>().basicMovement(maxSpeed, accelerationDuration, decelerationDuration);
+        GetComponent<BasicMovement>().basicMovement(maxSpeed, accelerationDuration, decelerationDuration, grounded);
     }
 
     private void Jump()
@@ -83,7 +84,7 @@ public class PlayerGorilla : MonoBehaviour
     private void throwBox()
     {
         heldBox.GetComponent<Rigidbody>().velocity += new Vector3(faceDirection * throwVelocity, 0, 0);
-        throwTimer = 0.1f;
+        throwTimer = 0.3f;
         heldBox.GetComponent<BoxCollider>().enabled = true;
 
         heldBox = null;
@@ -124,12 +125,8 @@ public class PlayerGorilla : MonoBehaviour
         {
             if (other.GetComponent<Box>() != null && heldBox == null)
             {
-                if (Input.GetKeyDown(KeyCode.E) && throwTimer < 0)
+                if (Input.GetKey(KeyCode.E) && throwTimer < 0)
                 {
-                    if (heldBox != null)
-                    {
-                        dropBox();
-                    }
                     throwTimer = 0.05f;
                     heldBox = other.gameObject;
                 }
@@ -142,15 +139,16 @@ public class PlayerGorilla : MonoBehaviour
         enabled = true;
 
         GetComponent<Rigidbody>().mass = 4;
-        GetComponent<MeshFilter>().mesh = gorillaMesh;
         GetComponent<CapsuleCollider>().height = 2;
+        mesh.SetActive(true);
     }
 
     public void Deactivate()
     {
         dropBox();
         enabled = false;
-        throwTimer = 0.2f;
+        throwTimer = 0.1f;
         jumptimer = 0.1f;
+        mesh.SetActive(false);
     }
 }

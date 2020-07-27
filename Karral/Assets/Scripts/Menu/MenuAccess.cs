@@ -12,6 +12,14 @@ public class MenuAccess : MonoBehaviour
     [SerializeField] Image unmutedImage;
     [SerializeField] Image mutedImage;
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            restartLevel();
+        }
+    }
+
     public void loadPreviousHub()
     {
         SceneManager.LoadScene(HubStorage.currentHub);

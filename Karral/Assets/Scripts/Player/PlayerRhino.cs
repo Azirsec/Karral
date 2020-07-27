@@ -6,6 +6,9 @@ public class PlayerRhino : MonoBehaviour
 {
     float movedir;
     int faceDirection;
+
+    [SerializeField] GameObject mesh;
+
     [SerializeField] float maxSpeed;
     [SerializeField] float accelerationDuration;
     [SerializeField] float decelerationDuration;
@@ -13,14 +16,12 @@ public class PlayerRhino : MonoBehaviour
 
     float jumptimer = 0.1f;
 
-    [SerializeField] Mesh rhinoMesh;
-
     bool grounded = false;
 
     // Update is called once per frame
     void Update()
     {
-        GetComponent<BasicMovement>().basicMovement(maxSpeed, accelerationDuration, decelerationDuration);
+        GetComponent<BasicMovement>().basicMovement(maxSpeed, accelerationDuration, decelerationDuration, grounded);
         Jump();
     }
 
@@ -69,12 +70,13 @@ public class PlayerRhino : MonoBehaviour
         enabled = true;
 
         GetComponent<Rigidbody>().mass = 8;
-        GetComponent<MeshFilter>().mesh = rhinoMesh;
         GetComponent<CapsuleCollider>().height = 2;
+        mesh.SetActive(true);
     }
 
     public void Deactivate()
     {
         enabled = false;
+        mesh.SetActive(false);
     }
 }

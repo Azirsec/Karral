@@ -5,7 +5,7 @@ using UnityEngine;
 public class BasicMovement : MonoBehaviour
 {
     string currentAnimation;
-    public string basicMovement(float maxSpeed, float accelerationDuration, float decelerationDuration)
+    public string basicMovement(float maxSpeed, float accelerationDuration, float decelerationDuration, bool grounded)
     {
         float movedir = Input.GetAxisRaw("Horizontal");
 
@@ -50,7 +50,7 @@ public class BasicMovement : MonoBehaviour
                 GetComponent<Rigidbody>().velocity = new Vector3(0, GetComponent<Rigidbody>().velocity.y, 0);
                 currentAnimation = "Idle";
             }
-            else
+            else 
             {
                 if (GetComponent<Rigidbody>().velocity.x > 0)
                 {
@@ -63,13 +63,25 @@ public class BasicMovement : MonoBehaviour
                 // if not slow, slow down
                 if (Time.deltaTime != 0)
                 {
-                    GetComponent<Rigidbody>().velocity -= new Vector3(
+                    if (grounded)
+                    {
+                        GetComponent<Rigidbody>().velocity -= new Vector3(
                             GetComponent<Rigidbody>().velocity.x / Mathf.Abs(GetComponent<Rigidbody>().velocity.x) *
                             maxSpeed / decelerationDuration * Time.deltaTime,
                             0,
                             0);
+                    }
+                    else
+                    {
+                        GetComponent<Rigidbody>().velocity -= new Vector3(
+                            GetComponent<Rigidbody>().velocity.x / Mathf.Abs(GetComponent<Rigidbody>().velocity.x) *
+                            maxSpeed / accelerationDuration * Time.deltaTime * 0.2f,
+                            0,
+                            0);
+                    }
                 }
             }
+         
         }
         return currentAnimation;
     }
