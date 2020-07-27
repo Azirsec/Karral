@@ -6,6 +6,9 @@ using UnityEngine;
 public class PlayerEagle : MonoBehaviour
 {
     float moveDir;
+
+    [SerializeField] GameObject mesh;
+
     [SerializeField] float maxSpeed;
     [SerializeField] float accelerationDuration;
     [SerializeField] float decelerationDuration;
@@ -14,8 +17,6 @@ public class PlayerEagle : MonoBehaviour
 
     int currentJumps;
 
-    [SerializeField] Mesh eagleMesh;
-
     float jumptimer = 0f;
 
     bool grounded = false;
@@ -23,7 +24,7 @@ public class PlayerEagle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GetComponent<BasicMovement>().basicMovement(maxSpeed, accelerationDuration, decelerationDuration);
+        GetComponent<BasicMovement>().basicMovement(maxSpeed, accelerationDuration, decelerationDuration, grounded);
         Jump();
     }
 
@@ -72,12 +73,13 @@ public class PlayerEagle : MonoBehaviour
         enabled = true;
 
         GetComponent<Rigidbody>().mass = 0.75f;
-        GetComponent<MeshFilter>().mesh = eagleMesh;
         GetComponent<CapsuleCollider>().height = 1.5f;
+        mesh.SetActive(true);
     }
 
     public void Deactivate()
     {
         enabled = false;
+        mesh.SetActive(false);
     }
 }

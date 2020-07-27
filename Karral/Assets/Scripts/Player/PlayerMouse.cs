@@ -6,6 +6,8 @@ public class PlayerMouse : MonoBehaviour
 {
     float movedir;
 
+    [SerializeField] GameObject mesh;
+
     [SerializeField] float maxSpeed;
     [SerializeField] float accelerationDuration;
     [SerializeField] float decelerationDuration;
@@ -15,12 +17,12 @@ public class PlayerMouse : MonoBehaviour
 
     float jumptimer = 0.1f;
 
-    [SerializeField] Mesh mouseMesh;
+    bool grounded = false;
 
     // Update is called once per frame
     void Update()
     {
-        GetComponent<BasicMovement>().basicMovement(maxSpeed, accelerationDuration, decelerationDuration);
+        GetComponent<BasicMovement>().basicMovement(maxSpeed, accelerationDuration, decelerationDuration, grounded);
         if (wallwalking)
         {
             wallMovement();
@@ -110,6 +112,8 @@ public class PlayerMouse : MonoBehaviour
                     GetComponent<Rigidbody>().useGravity = false;
                 }
             }
+
+            grounded = true;
         }
     }
 
@@ -121,6 +125,7 @@ public class PlayerMouse : MonoBehaviour
         }
 
         wallwalking = false;
+        grounded = false;
     }
 
     public void Activate()
@@ -128,8 +133,8 @@ public class PlayerMouse : MonoBehaviour
         enabled = true;
 
         GetComponent<Rigidbody>().mass = 0.75f;
-        GetComponent<MeshFilter>().mesh = mouseMesh;
         GetComponent<CapsuleCollider>().height = 1;
+        mesh.SetActive(true);
     }
 
     public void Deactivate()
@@ -137,5 +142,6 @@ public class PlayerMouse : MonoBehaviour
         wallwalking = false;
         GetComponent<Rigidbody>().useGravity = true;
         enabled = false;
+        mesh.SetActive(false);
     }
 }
