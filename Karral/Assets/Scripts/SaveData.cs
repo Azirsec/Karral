@@ -72,6 +72,54 @@ public class SaveData
         }
     }
 
+    public void reset()
+    {
+        dna[0] = true;
+        dna[1] = false;
+        dna[2] = false;
+        dna[3] = false;
+        dna[4] = false;
+
+        hub = 1;
+
+        hh_pos = new float[3] { 0, 0, 0 };
+        gh_pos = new float[3] { 0, 0, 0 };
+        mh_pos = new float[3] { 0, 0, 0 };
+        rh_pos = new float[3] { 0, 0, 0 };
+        eh_pos = new float[3] { 0, 0, 0 };
+
+        hl_completed = new bool[5];
+        for (int i = 0; i < 5; i++)
+        {
+            hl_completed[i] = false;
+        }
+
+        gl_completed = new bool[4];
+        for (int i = 0; i < 4; i++)
+        {
+            gl_completed[i] = false;
+        }
+
+        ml_completed = new bool[4];
+        for (int i = 0; i < 4; i++)
+        {
+            ml_completed[i] = false;
+        }
+
+        rl_completed = new bool[4];
+        for (int i = 0; i < 4; i++)
+        {
+            rl_completed[i] = false;
+        }
+
+        el_completed = new bool[4];
+        for (int i = 0; i < 4; i++)
+        {
+            el_completed[i] = false;
+        }
+        el_completed[1] = true;
+    }
+
     public void loadGame()
     {
         HubStorage.humanDNA = dna[0];

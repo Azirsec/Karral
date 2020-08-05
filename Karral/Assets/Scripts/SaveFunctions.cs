@@ -35,4 +35,18 @@ public static class SaveFunctions
             Debug.LogError("Save file not found in " + path);
         }
     }
+
+    public static void resetGame()
+    {
+        BinaryFormatter formatter = new BinaryFormatter();
+
+        FileStream stream = new FileStream(path, FileMode.Create);
+
+        SaveData data = new SaveData();
+
+        data.reset();
+
+        formatter.Serialize(stream, data);
+        stream.Close();
+    }
 }

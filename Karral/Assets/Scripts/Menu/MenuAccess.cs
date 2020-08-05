@@ -12,6 +12,8 @@ public class MenuAccess : MonoBehaviour
     [SerializeField] Image unmutedImage;
     [SerializeField] Image mutedImage;
 
+    [SerializeField] GameObject resetButton;
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.R))
@@ -38,6 +40,7 @@ public class MenuAccess : MonoBehaviour
             Time.timeScale = 1;
             playImage.gameObject.SetActive(false);
             pauseImage.gameObject.SetActive(true);
+            resetButton.gameObject.SetActive(false);
         }
         else
         {
@@ -45,6 +48,15 @@ public class MenuAccess : MonoBehaviour
             Time.timeScale = 0;
             playImage.gameObject.SetActive(true);
             pauseImage.gameObject.SetActive(false);
+            resetButton.gameObject.SetActive(true);
         }
+    }
+
+    public void resetSave()
+    {
+        SaveFunctions.resetGame();
+        SaveFunctions.LoadGame();
+        togglePause();
+        SceneManager.LoadScene(HubStorage.currentHub);
     }
 }
