@@ -38,7 +38,7 @@ public class MovingPlatform : MonoBehaviour
     {
         if (other.GetComponent<PlayerHuman>() != null)
         {
-            other.gameObject.GetComponent<Rigidbody>().position += new Vector3(GetComponent<Rigidbody>().velocity.x * Time.deltaTime * 0.95f, 0, 0);
+            other.gameObject.GetComponent<Rigidbody>().position += new Vector3(GetComponent<Rigidbody>().velocity.x * Time.deltaTime * 0.87f, 0, 0);
         }
     }
 }

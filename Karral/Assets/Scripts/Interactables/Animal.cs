@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class Animal : MonoBehaviour
 {
     [SerializeField] int DNAcode;
+    [SerializeField] animalUnlockAnimation animalUnlockAnimation;
 
     public void interact()
     {
@@ -46,6 +47,7 @@ public class Animal : MonoBehaviour
                 if (Input.GetKey(KeyCode.E))
                 {
                     interact();
+                    animalUnlockAnimation.doTheThing();
                 }
             }
         }
