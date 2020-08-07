@@ -4,7 +4,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 public static class SaveFunctions
 {
-    static string path = Application.persistentDataPath + "/game.sav";
+    public static string path = Application.persistentDataPath + "/game.sav";
     public static void SaveGame()
     {
         BinaryFormatter formatter = new BinaryFormatter();

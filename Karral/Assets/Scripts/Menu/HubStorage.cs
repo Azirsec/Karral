@@ -265,4 +265,9 @@ public class HubStorage : MonoBehaviour
         SaveFunctions.LoadGame();
         SceneManager.LoadScene(currentHub);
     }
+
+    public void resetGame()
+    {
+        SaveFunctions.resetGame();
+    }
 }
