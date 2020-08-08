@@ -10,6 +10,8 @@ public class DeathPlane : MonoBehaviour
         if (other.GetComponent<PlayerHuman>() != null)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            Time.timeScale = 1;
+            Time.fixedDeltaTime = Time.timeScale * 0.02f;
         }
     }
 }

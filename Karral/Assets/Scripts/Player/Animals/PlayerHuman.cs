@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerHuman : MonoBehaviour
 {
@@ -16,6 +17,10 @@ public class PlayerHuman : MonoBehaviour
     [SerializeField] float width;
 
     List<KeyColour> heldKeys = new List<KeyColour>();
+
+    [SerializeField] Image rKey;
+    [SerializeField] Image gKey;
+    [SerializeField] Image bKey;
 
     float jumptimer = 0.1f;
 
@@ -36,8 +41,6 @@ public class PlayerHuman : MonoBehaviour
             Jump();
         }
     }
-
-    
 
     private void Jump()
     {
@@ -67,7 +70,7 @@ public class PlayerHuman : MonoBehaviour
 
     private void OnCollisionExit(Collision collision)
     {
-            grounded = false;
+        grounded = false;
     }
 
     private void OnTriggerStay(Collider other)
@@ -89,13 +92,44 @@ public class PlayerHuman : MonoBehaviour
                 heldKeys.Add(other.GetComponent<Key>().getColour());
                 other.GetComponentsInChildren<MeshRenderer>()[1].enabled = false;
                 other.GetComponent<SphereCollider>().enabled = false;
-                //Destroy(other.gameObject);
+                updateKeyUI();
             }
 
             //unlock door
             if (other.GetComponent<Door>() != null)
             {
                 other.GetComponent<Door>().unlock(heldKeys);
+                updateKeyUI();
+            }
+        }
+    }
+
+    void disableKeys()
+    {
+        rKey.enabled = false;
+        gKey.enabled = false;
+        bKey.enabled = false;
+    }
+
+    void updateKeyUI()
+    {
+        disableKeys();
+
+        foreach (KeyColour key in heldKeys)
+        {
+            switch (key)
+            {
+                case KeyColour.red:
+                    rKey.enabled = true;
+                    break;
+
+                case KeyColour.green:
+                    gKey.enabled = true;
+                    break;
+
+                case KeyColour.blue:
+                    bKey.enabled = true;
+                    break;
             }
         }
     }
@@ -107,6 +141,7 @@ public class PlayerHuman : MonoBehaviour
         GetComponent<Rigidbody>().mass = weight;
         GetComponent<BoxCollider>().size = new Vector3(width, height, 1);
         mesh.SetActive(true);
+        updateKeyUI();
     }
 
     public void Deactivate()
@@ -114,5 +149,7 @@ public class PlayerHuman : MonoBehaviour
         enabled = false;
         jumptimer = 0.1f;
         mesh.SetActive(false);
+
+        disableKeys();
     }
 }
