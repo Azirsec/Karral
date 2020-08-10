@@ -2026,13 +2026,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mesh: {fileID: 7738838964022492767}
-  maxSpeed: 10
+  maxSpeed: 15
   accelerationDuration: 0.25
   decelerationDuration: 0.1
   jumpSpeed: 10
   weight: 0.75
-  height: 0.95
-  width: 0.95
+  height: 0.8
+  width: 0.8
 --- !u!114 &4502064982007794751
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4003,7 +4003,7 @@ Transform:
   m_GameObject: {fileID: 7738838964022492767}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_Children: []
   m_Father: {fileID: 7500791160408516760}
   m_RootOrder: 2

@@ -26,6 +26,8 @@ public class PlayerHuman : MonoBehaviour
 
     bool grounded = false;
 
+    bool firstframe = true;
+
     private void Start()
     {
         //Application.targetFrameRate = 60;
@@ -34,11 +36,18 @@ public class PlayerHuman : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GetComponent<BasicMovement>().basicMovement(maxSpeed, accelerationDuration, decelerationDuration, grounded);
-        jumptimer -= Time.deltaTime;
-        if (Input.GetKey(KeyCode.Space))
+        if (!firstframe)
         {
-            Jump();
+            GetComponent<BasicMovement>().basicMovement(maxSpeed, accelerationDuration, decelerationDuration, grounded);
+            jumptimer -= Time.deltaTime;
+            if (Input.GetKey(KeyCode.Space))
+            {
+                Jump();
+            }
+        }
+        else
+        {
+            firstframe = false;
         }
     }
 
