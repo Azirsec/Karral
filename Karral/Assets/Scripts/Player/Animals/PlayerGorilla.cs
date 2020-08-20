@@ -142,8 +142,13 @@ public class PlayerGorilla : MonoBehaviour
     {
         enabled = true;
 
+        // set gorilla values
         GetComponent<Rigidbody>().mass = weight;
-        GetComponent<BoxCollider>().size = new Vector3(width, height, 1);
+        GetComponent<CapsuleCollider>().enabled = true;
+        GetComponent<CapsuleCollider>().radius = width / 2f;
+        GetComponent<CapsuleCollider>().height = height;
+        GetComponent<CapsuleCollider>().direction = 1;
+
         mesh.SetActive(true);
     }
 

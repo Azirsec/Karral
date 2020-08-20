@@ -318,7 +318,7 @@ Transform:
   m_GameObject: {fileID: 1387710655192331299}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7500791160408516760}
   m_RootOrder: 1
@@ -1923,7 +1923,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4502064982007794722}
-  - component: {fileID: 6018590022710173377}
+  - component: {fileID: 3166870469359117088}
   - component: {fileID: 4502064982007794726}
   - component: {fileID: 4502064982007794745}
   - component: {fileID: 4502064982007794748}
@@ -1956,8 +1956,8 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &6018590022710173377
-BoxCollider:
+--- !u!136 &3166870469359117088
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1966,8 +1966,9 @@ BoxCollider:
   m_Material: {fileID: 13400000, guid: 0a9ec000a28a48243a4a3292e94af3a2, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 2, z: 1}
+  m_Radius: 0.35
+  m_Height: 2
+  m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &4502064982007794726
 MonoBehaviour:
@@ -1988,7 +1989,7 @@ MonoBehaviour:
   jumpSpeed: 12
   weight: 1
   height: 2
-  width: 1
+  width: 0.7
   rKey: {fileID: 5592208003471541085}
   gKey: {fileID: 5680636472749482728}
   bKey: {fileID: 4413937921575276346}
@@ -2012,7 +2013,7 @@ MonoBehaviour:
   throwVelocity: 6
   weight: 4
   height: 2
-  width: 1
+  width: 1.5
 --- !u!114 &4502064982007794748
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2072,8 +2073,8 @@ MonoBehaviour:
   jumpSpeed: 10
   totalJumps: 3
   weight: 0.75
-  height: 1.5
-  width: 1
+  height: 1
+  width: 0.7
 --- !u!54 &4502064982007794749
 Rigidbody:
   m_ObjectHideFlags: 0

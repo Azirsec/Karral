@@ -14,16 +14,11 @@ public class Door : MonoBehaviour
     {
         if (!redLocked && !blueLocked && !greenLocked && !open)
         {
-            GetComponent<MeshRenderer>().enabled = false;
-            GetComponent<BoxCollider>().enabled = false;
+            //GetComponent<MeshRenderer>().enabled = false;
+            //GetComponent<BoxCollider>().enabled = false;
+            gameObject.SetActive(false);
             open = true;
         }
-       // else if (open)
-       // {
-       //     GetComponent<MeshRenderer>().enabled = true;
-       //     GetComponent<BoxCollider>().enabled = true;
-       //     open = false;
-       // }
     }
 
     public void unlock(List<KeyColour> keys)

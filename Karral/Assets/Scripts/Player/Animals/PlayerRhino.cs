@@ -70,8 +70,13 @@ public class PlayerRhino : MonoBehaviour
     {
         enabled = true;
 
+        // set rhino values
         GetComponent<Rigidbody>().mass = weight;
-        GetComponent<BoxCollider>().size = new Vector3(width, height, 1);
+        GetComponent<CapsuleCollider>().enabled = true;
+        GetComponent<CapsuleCollider>().radius = height / 2f;
+        GetComponent<CapsuleCollider>().height = width;
+        GetComponent<CapsuleCollider>().direction = 0;
+
         mesh.SetActive(true);
     }
 
