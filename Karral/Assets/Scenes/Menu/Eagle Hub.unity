@@ -1339,7 +1339,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 638bff7efdd5e7640884134ce8adc0b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doorway: {fileID: 0}
+  doorway: {fileID: 1639582835}
 --- !u!65 &363661625
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4526,6 +4526,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a5e3e94dfda21504387bd095d3dbb45e, type: 3}
+--- !u!1 &1639582835 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1008488700260227681, guid: a5e3e94dfda21504387bd095d3dbb45e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1639582834}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1668689197
 GameObject:
   m_ObjectHideFlags: 0

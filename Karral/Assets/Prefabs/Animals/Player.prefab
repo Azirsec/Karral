@@ -1987,7 +1987,7 @@ MonoBehaviour:
   accelerationDuration: 0.25
   decelerationDuration: 0.1
   jumpSpeed: 12
-  weight: 1
+  weight: 2
   height: 2
   width: 0.7
   rKey: {fileID: 5592208003471541085}
