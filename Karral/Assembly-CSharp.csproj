@@ -79,8 +79,9 @@
     <Compile Include="Assets\Scripts\Moving Objects\PressurePlate.cs" />
     <Compile Include="Assets\Scripts\Misc_\DevHacks.cs" />
     <Compile Include="Assets\Scripts\Misc_\DeathPlane.cs" />
-    <Compile Include="Assets\Scripts\Interactables\EscapeTrigger.cs" />
     <Compile Include="Assets\Scripts\Misc_\animalUnlockAnimation.cs" />
+    <Compile Include="Assets\Scripts\Interactables\EscapeTrigger.cs" />
+    <Compile Include="Assets\Scripts\Misc_\TutorialBoard.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
