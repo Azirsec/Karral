@@ -1283,30 +1283,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7129065994442803361, guid: 405498e7969076a4b974da37eb2550e4,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7129065994442803361, guid: 405498e7969076a4b974da37eb2550e4,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7129065994442803364, guid: 405498e7969076a4b974da37eb2550e4,
         type: 3}
       propertyPath: m_Name
       value: Moving platform
-      objectReference: {fileID: 0}
-    - target: {fileID: 7129065994442803374, guid: 405498e7969076a4b974da37eb2550e4,
-        type: 3}
-      propertyPath: movementSpeed.y
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7129065994442803374, guid: 405498e7969076a4b974da37eb2550e4,
-        type: 3}
-      propertyPath: maxMoveTime
-      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 405498e7969076a4b974da37eb2550e4, type: 3}
