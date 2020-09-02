@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class PlayerHuman : MonoBehaviour
 {
     [SerializeField] GameObject mesh;
+    [SerializeField] Animator animator;
 
     [SerializeField] float maxSpeed;
     [SerializeField] float accelerationDuration;
@@ -24,6 +25,9 @@ public class PlayerHuman : MonoBehaviour
 
     float jumptimer = 0.1f;
 
+    int faceDirection = 1;
+    bool pushing = false;
+
     bool grounded = false;
 
     bool firstframe = true;
@@ -38,7 +42,19 @@ public class PlayerHuman : MonoBehaviour
     {
         if (!firstframe)
         {
+            float temp = Input.GetAxisRaw("Horizontal");
+            if (temp > 0)
+            {
+                faceDirection = 1;
+                mesh.transform.eulerAngles = new Vector3(mesh.transform.eulerAngles.x, 90, mesh.transform.eulerAngles.z);
+            }
+            else if (temp < 0)
+            {
+                faceDirection = -1;
+                mesh.transform.eulerAngles = new Vector3(mesh.transform.eulerAngles.x, -90, mesh.transform.eulerAngles.z);
+            }
             GetComponent<BasicMovement>().basicMovement(maxSpeed, accelerationDuration, decelerationDuration, grounded);
+
             jumptimer -= Time.deltaTime;
             if (Input.GetKey(KeyCode.Space))
             {
@@ -49,6 +65,19 @@ public class PlayerHuman : MonoBehaviour
         {
             firstframe = false;
         }
+    }
+
+    private void LateUpdate()
+    {
+        animationStuff();
+    }
+
+    void animationStuff()
+    {
+        animator.SetBool("Grounded", grounded);
+        animator.SetBool("Pushing", pushing);
+        animator.SetFloat("XSpeed", Mathf.Abs(transform.GetComponent<Rigidbody>().velocity.x));
+        animator.SetFloat("YSpeed", transform.GetComponent<Rigidbody>().velocity.y);
     }
 
     private void Jump()
@@ -73,6 +102,10 @@ public class PlayerHuman : MonoBehaviour
                 {
                     grounded = true;
                 }
+                if (Mathf.Abs(collision.contacts[i].normal.x) > 0.8)
+                {
+                    pushing = true;
+                }
             }
         }
     }
@@ -80,6 +113,7 @@ public class PlayerHuman : MonoBehaviour
     private void OnCollisionExit(Collision collision)
     {
         grounded = false;
+        pushing = false;
     }
 
     private void OnTriggerStay(Collider other)

@@ -23,13 +23,4 @@ public class EscapeTrigger : MonoBehaviour
         }
     }
 
-    //private void OnTriggerExit(Collider other)
-    //{
-    //    if (other.GetComponent<PlayerHuman>() != null && doorway != null)
-    //    {
-    //        doorway.SetActive(true);
-    //        doorway.GetComponent<MeshRenderer>().enabled = true;
-    //        doorway.GetComponent<BoxCollider>().enabled = true;
-    //    }
-    //}
 }
