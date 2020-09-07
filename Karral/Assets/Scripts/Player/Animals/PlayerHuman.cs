@@ -189,7 +189,7 @@ public class PlayerHuman : MonoBehaviour
         GetComponent<CapsuleCollider>().direction = 1;
 
         mesh.SetActive(true);
-        updateKeyUI();
+        //updateKeyUI();
     }
 
     public void Deactivate()
@@ -198,6 +198,6 @@ public class PlayerHuman : MonoBehaviour
         jumptimer = 0.1f;
         mesh.SetActive(false);
 
-        disableKeys();
+        //disableKeys();
     }
 }

@@ -19,6 +19,9 @@ public class PlayerEagle : MonoBehaviour
     [SerializeField] float height;
     [SerializeField] float width;
 
+    [SerializeField] GameObject featherUI;
+    [SerializeField] GameObject[] feathers =  new GameObject[4];
+
     int currentJumps;
 
     float jumptimer = 0f;
@@ -30,6 +33,7 @@ public class PlayerEagle : MonoBehaviour
     {
         GetComponent<BasicMovement>().basicMovement(maxSpeed, accelerationDuration, decelerationDuration, grounded);
         Jump();
+        updateFeathers();
     }
 
     private void Jump()
@@ -37,7 +41,6 @@ public class PlayerEagle : MonoBehaviour
         jumptimer -= Time.deltaTime;
         if (Input.GetKey(KeyCode.Space))
         {
-
             if (jumptimer <= 0f && currentJumps > 0)
             {
                 if (!grounded)
@@ -48,6 +51,7 @@ public class PlayerEagle : MonoBehaviour
                 GetComponent<Rigidbody>().velocity = new Vector3(GetComponent<Rigidbody>().velocity.x, jumpSpeed, 0);
                 jumptimer = 0.3f;
                 grounded = false;
+                feathers[3].SetActive(false);
             }
         }
     }
@@ -60,6 +64,7 @@ public class PlayerEagle : MonoBehaviour
             {
                 grounded = true;
                 currentJumps = totalJumps;
+                feathers[3].SetActive(true);
             }
         }
     }
@@ -69,12 +74,30 @@ public class PlayerEagle : MonoBehaviour
         if (enabled)
         {
             grounded = false;
+            feathers[3].SetActive(false);
+        }
+    }
+
+    void updateFeathers()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            if (i < currentJumps)
+            {
+                feathers[i].SetActive(true);
+            }
+            else
+            {
+                feathers[i].SetActive(false);
+            }
         }
     }
 
     public void Activate()
     {
         enabled = true;
+
+        featherUI.SetActive(true);
 
         // set eagle values
         GetComponent<Rigidbody>().mass = weight;
@@ -89,6 +112,7 @@ public class PlayerEagle : MonoBehaviour
     public void Deactivate()
     {
         enabled = false;
+        featherUI.SetActive(false);
         mesh.SetActive(false);
     }
 }
