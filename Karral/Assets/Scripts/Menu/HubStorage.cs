@@ -264,6 +264,8 @@ public class HubStorage : MonoBehaviour
     {
         SaveFunctions.LoadGame();
         SceneManager.LoadScene(currentHub);
+        Time.timeScale = 1;
+        Time.fixedDeltaTime = Time.timeScale * 0.02f;
     }
 
     public void resetGame()

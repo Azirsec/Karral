@@ -25,11 +25,15 @@ public class MenuAccess : MonoBehaviour
     public void loadPreviousHub()
     {
         SceneManager.LoadScene(HubStorage.currentHub);
+        Time.timeScale = 1f;
+        Time.fixedDeltaTime = Time.timeScale * 0.02f;
     }
 
     public void restartLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Time.timeScale = 1f;
+        Time.fixedDeltaTime = Time.timeScale * 0.02f;
     }
 
     public void togglePause()
@@ -58,5 +62,7 @@ public class MenuAccess : MonoBehaviour
         SaveFunctions.LoadGame();
         togglePause();
         SceneManager.LoadScene(HubStorage.currentHub);
+        Time.timeScale = 1f;
+        Time.fixedDeltaTime = Time.timeScale * 0.02f;
     }
 }

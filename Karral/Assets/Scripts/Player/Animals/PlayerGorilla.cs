@@ -99,7 +99,7 @@ public class PlayerGorilla : MonoBehaviour
 
             heldBox.GetComponent<BoxCollider>().enabled = false;
 
-            heldBox.transform.position = transform.position + Vector3.up * 2 + new Vector3(0, heldBox.transform.localScale.y / 2f, 0);
+            heldBox.transform.position = transform.position + Vector3.up * 1.5f + new Vector3(0, heldBox.transform.localScale.y / 2f, 0);
             heldBox.GetComponent<Rigidbody>().velocity = GetComponent<Rigidbody>().velocity;
 
             if (Input.GetKeyDown(KeyCode.E) && throwTimer <= 0)
@@ -132,8 +132,6 @@ public class PlayerGorilla : MonoBehaviour
         heldBox = null;
     }
 
-  
-
     private void OnCollisionStay(Collision collision)
     {
         if (enabled)
@@ -144,13 +142,18 @@ public class PlayerGorilla : MonoBehaviour
                 {
                     grounded = true;
                 }
+                if (Mathf.Abs(collision.contacts[i].normal.x) > 0.8 && !(collision.contacts[i].otherCollider.gameObject == heldBox))
+                {
+                    pushing = true;
+                }
             }
         }
     }
 
     private void OnCollisionExit(Collision collision)
     {
-            grounded = false;
+        grounded = false;
+        pushing = false;
     }
 
     private void OnTriggerStay(Collider other)
@@ -163,6 +166,7 @@ public class PlayerGorilla : MonoBehaviour
                 {
                     throwTimer = 0.05f;
                     heldBox = other.gameObject;
+                    pushing = false;
                 }
             }
         }
