@@ -7,6 +7,7 @@ public class PlayerGorilla : MonoBehaviour
     int faceDirection = 1;
 
     [SerializeField] GameObject mesh;
+    [SerializeField] Animator animator;
 
     [SerializeField] float maxSpeed;
     [SerializeField] float accelerationDuration;
@@ -26,6 +27,9 @@ public class PlayerGorilla : MonoBehaviour
     float jumptimer = 0.1f;
 
     bool grounded = false;
+    bool pushing = false;
+    bool carrying = false;
+
 
     // Update is called once per frame
     void Update()
@@ -41,13 +45,31 @@ public class PlayerGorilla : MonoBehaviour
         if (temp > 0)
         {
             faceDirection = 1;
+            mesh.transform.eulerAngles = new Vector3(mesh.transform.eulerAngles.x, 90, mesh.transform.eulerAngles.z);
         }
         else if (temp < 0)
         {
             faceDirection = -1;
+            mesh.transform.eulerAngles = new Vector3(mesh.transform.eulerAngles.x, -90, mesh.transform.eulerAngles.z);
         }
 
         GetComponent<BasicMovement>().basicMovement(maxSpeed, accelerationDuration, decelerationDuration, grounded);
+    }
+
+    private void LateUpdate()
+    {
+        animationStuff();
+    }
+
+    void animationStuff()
+    {
+        animator.SetBool("Grounded", grounded);
+        animator.SetBool("Pushing", pushing);
+        animator.SetBool("Carrying", carrying);
+        animator.SetFloat("XSpeed", Mathf.Abs(transform.GetComponent<Rigidbody>().velocity.x));
+        animator.SetFloat("YSpeed", transform.GetComponent<Rigidbody>().velocity.y);
+
+        animator.SetLayerWeight(1, 1);
     }
 
     private void Jump()
@@ -73,6 +95,8 @@ public class PlayerGorilla : MonoBehaviour
 
         if (heldBox != null)
         {
+            carrying = true;
+
             heldBox.GetComponent<BoxCollider>().enabled = false;
 
             heldBox.transform.position = transform.position + Vector3.up * 2 + new Vector3(0, heldBox.transform.localScale.y / 2f, 0);
@@ -91,6 +115,8 @@ public class PlayerGorilla : MonoBehaviour
         throwTimer = 0.3f;
         heldBox.GetComponent<BoxCollider>().enabled = true;
 
+        carrying = false;
+
         heldBox = null;
     }
 
@@ -101,8 +127,12 @@ public class PlayerGorilla : MonoBehaviour
             heldBox.GetComponent<BoxCollider>().enabled = true;
         }
 
+        carrying = false;
+
         heldBox = null;
     }
+
+  
 
     private void OnCollisionStay(Collision collision)
     {

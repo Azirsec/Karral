@@ -25,7 +25,6 @@ public class PlayerHuman : MonoBehaviour
 
     float jumptimer = 0.1f;
 
-    int faceDirection = 1;
     bool pushing = false;
 
     bool grounded = false;
@@ -45,12 +44,10 @@ public class PlayerHuman : MonoBehaviour
             float temp = Input.GetAxisRaw("Horizontal");
             if (temp > 0)
             {
-                faceDirection = 1;
                 mesh.transform.eulerAngles = new Vector3(mesh.transform.eulerAngles.x, 90, mesh.transform.eulerAngles.z);
             }
             else if (temp < 0)
             {
-                faceDirection = -1;
                 mesh.transform.eulerAngles = new Vector3(mesh.transform.eulerAngles.x, -90, mesh.transform.eulerAngles.z);
             }
             GetComponent<BasicMovement>().basicMovement(maxSpeed, accelerationDuration, decelerationDuration, grounded);
