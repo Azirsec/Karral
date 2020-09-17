@@ -8,6 +8,7 @@ public class PlayerRhino : MonoBehaviour
     int faceDirection;
 
     [SerializeField] GameObject mesh;
+    [SerializeField] Animator animator;
 
     [SerializeField] float maxSpeed;
     [SerializeField] float accelerationDuration;
@@ -25,10 +26,30 @@ public class PlayerRhino : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        float temp = Input.GetAxisRaw("Horizontal");
+        if (temp > 0)
+        {
+            mesh.transform.eulerAngles = new Vector3(mesh.transform.eulerAngles.x, 90, mesh.transform.eulerAngles.z);
+        }
+        else if (temp < 0)
+        {
+            mesh.transform.eulerAngles = new Vector3(mesh.transform.eulerAngles.x, -90, mesh.transform.eulerAngles.z);
+        }
         GetComponent<BasicMovement>().basicMovement(maxSpeed, accelerationDuration, decelerationDuration, grounded);
         Jump();
     }
 
+    private void LateUpdate()
+    {
+        animationStuff();
+    }
+
+    void animationStuff()
+    {
+        animator.SetBool("Grounded", grounded);
+        animator.SetFloat("XSpeed", Mathf.Abs(transform.GetComponent<Rigidbody>().velocity.x));
+        animator.SetFloat("YSpeed", transform.GetComponent<Rigidbody>().velocity.y);
+    }
 
     private void Jump()
     {
