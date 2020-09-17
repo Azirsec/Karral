@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Scenes/Levels/Human/Human 5.unity
+- path: Assets/Scenes/Levels/Eagle/Eagle 5.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
