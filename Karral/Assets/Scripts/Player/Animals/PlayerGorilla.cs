@@ -30,7 +30,6 @@ public class PlayerGorilla : MonoBehaviour
     bool pushing = false;
     bool carrying = false;
 
-
     // Update is called once per frame
     void Update()
     {

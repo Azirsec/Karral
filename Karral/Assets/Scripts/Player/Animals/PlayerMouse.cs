@@ -5,8 +5,11 @@ using UnityEngine;
 public class PlayerMouse : MonoBehaviour
 {
     float movedir;
+    int faceDirection = 1;
+    int wallDirection = 1;
 
     [SerializeField] GameObject mesh;
+    [SerializeField] Animator animator;
 
     [SerializeField] float maxSpeed;
     [SerializeField] float accelerationDuration;
@@ -20,18 +23,54 @@ public class PlayerMouse : MonoBehaviour
     bool wallwalking = false;
 
     float jumptimer = 0.1f;
-
     bool grounded = false;
+    bool pushing = false;
+    bool moving = false;
 
     // Update is called once per frame
     void Update()
     {
+        float temp = Input.GetAxisRaw("Horizontal");
+
+
         GetComponent<BasicMovement>().basicMovement(maxSpeed, accelerationDuration, decelerationDuration, grounded);
         if (wallwalking)
         {
             wallMovement();
         }
+        else
+        {
+            if (temp > 0)
+            {
+                faceDirection = 1;
+                mesh.transform.eulerAngles = new Vector3(0, 90, mesh.transform.eulerAngles.z);
+            }
+            else if (temp < 0)
+            {
+                faceDirection = -1;
+                mesh.transform.eulerAngles = new Vector3(0, -90, mesh.transform.eulerAngles.z);
+            }
+        }
         jumptimer -= Time.deltaTime;
+    }
+
+    private void LateUpdate()
+    {
+        animationStuff();
+    }
+
+    void animationStuff()
+    {
+        if (GetComponent<Rigidbody>().velocity.magnitude > 0.2f)
+        {
+            moving = true;
+        }
+        animator.SetBool("Grounded", grounded);
+        animator.SetBool("Pushing", pushing);
+        animator.SetBool("Moving", moving);
+        animator.SetFloat("YSpeed", transform.GetComponent<Rigidbody>().velocity.y);
+
+        animator.SetLayerWeight(1, 1);
     }
 
     void wallMovement()
@@ -112,6 +151,26 @@ public class PlayerMouse : MonoBehaviour
             {
                 if (Mathf.Abs(collision.contacts[i].normal.x) > 0.9)
                 {
+                    if (GetComponent<Rigidbody>().velocity.y < 0)
+                    {
+                        wallDirection = 1;
+                    }
+                    else if (GetComponent<Rigidbody>().velocity.y > 0)
+                    {
+                        wallDirection = -1;
+                    }
+
+                    if (collision.contacts[i].normal.x < 0)
+                    {
+                        mesh.transform.eulerAngles = new Vector3(wallDirection * 90, wallDirection * -90, 0);
+                        mesh.transform.localPosition = new Vector3(0.4f, 0, 0);
+                    }
+                    else if (collision.contacts[i].normal.x > 0)
+                    {
+                        mesh.transform.eulerAngles = new Vector3(wallDirection * 90, wallDirection * 90, 0);
+                        mesh.transform.localPosition = new Vector3(-0.4f, 0, 0);
+                    }
+
                     wallwalking = true;
                     GetComponent<Rigidbody>().useGravity = false;
                 }
@@ -126,6 +185,17 @@ public class PlayerMouse : MonoBehaviour
         if (enabled)
         {
             GetComponent<Rigidbody>().useGravity = true;
+        }
+
+        if (GetComponent<Rigidbody>().velocity.x < 0)
+        {
+            mesh.transform.eulerAngles = new Vector3(0, -90, 0);
+            mesh.transform.localPosition = new Vector3(0, -0.4f, 0);
+        }
+        else
+        {
+            mesh.transform.eulerAngles = new Vector3(0, 90, 0);
+            mesh.transform.localPosition = new Vector3(0, -0.4f, 0);
         }
 
         wallwalking = false;
