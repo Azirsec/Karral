@@ -7,6 +7,7 @@ public class PlayerMouse : MonoBehaviour
     float movedir;
 
     [SerializeField] GameObject mesh;
+    [SerializeField] Animator animator;
 
     [SerializeField] float maxSpeed;
     [SerializeField] float accelerationDuration;
@@ -17,22 +18,58 @@ public class PlayerMouse : MonoBehaviour
     [SerializeField] float height;
     [SerializeField] float width;
 
-    bool wallwalking = false;
+    [SerializeField] bool wallwalking = false;
 
     float jumptimer = 0.1f;
 
-    bool grounded = false;
+    float nonZeroTempX = 0;
+
+    [SerializeField] bool grounded = false;
+    [SerializeField] bool pushing = false;
 
     // Update is called once per frame
     void Update()
     {
+        //print(animator.GetCurrentAnimatorClipInfo(0)[0].clip.name);
+        print(Mathf.Abs(transform.GetComponent<Rigidbody>().velocity.x));
+
+        float tempX = Input.GetAxisRaw("Horizontal");
+        
+        if (tempX > 0)
+        {
+            nonZeroTempX = tempX;
+            mesh.transform.eulerAngles = new Vector3(mesh.transform.eulerAngles.x, 90, mesh.transform.eulerAngles.z);
+        }
+        else if (tempX < 0)
+        {
+            nonZeroTempX = tempX;
+            mesh.transform.eulerAngles = new Vector3(mesh.transform.eulerAngles.x, -90, mesh.transform.eulerAngles.z);
+        }
+        
         GetComponent<BasicMovement>().basicMovement(maxSpeed, accelerationDuration, decelerationDuration, grounded);
+
         if (wallwalking)
         {
+            float tempY = Input.GetAxisRaw("Vertical");
+            if (tempY > 0)
+            {
+                mesh.transform.eulerAngles = new Vector3(-90, 90 * nonZeroTempX, mesh.transform.eulerAngles.z);
+            }
+            else if (tempY < 0)
+            {
+                mesh.transform.eulerAngles = new Vector3(90, -90 * nonZeroTempX, mesh.transform.eulerAngles.z);
+            }
             wallMovement();
         }
+        else
+        {
+            mesh.transform.eulerAngles = new Vector3(0, mesh.transform.eulerAngles.y, mesh.transform.eulerAngles.z);
+        }
+        
+
         jumptimer -= Time.deltaTime;
     }
+
 
     void wallMovement()
     {
@@ -87,6 +124,21 @@ public class PlayerMouse : MonoBehaviour
 
     }
 
+    private void LateUpdate()
+    {
+        animationStuff();
+    }
+
+    void animationStuff()
+    {
+        animator.SetBool("isGrounded", grounded);
+        animator.SetBool("isPushing", pushing);
+        animator.SetFloat("xVel", Mathf.Abs(transform.GetComponent<Rigidbody>().velocity.x));
+        animator.SetFloat("yVel", transform.GetComponent<Rigidbody>().velocity.y);
+
+        //animator.SetLayerWeight(1, 1);
+    }
+
     private void Jump(Vector3 jumpDirection)
     {
         if (jumptimer <= 0f)
@@ -110,7 +162,12 @@ public class PlayerMouse : MonoBehaviour
 
             for (int i = 0; i < collision.contactCount; i++)
             {
-                if (Mathf.Abs(collision.contacts[i].normal.x) > 0.9)
+                if (Mathf.Abs(collision.contacts[i].normal.x) > 0.9 && collision.gameObject.tag == "Box")
+                {
+                    pushing = true;
+                    GetComponent<Rigidbody>().useGravity = false;
+                }
+                if(Mathf.Abs(collision.contacts[i].normal.x) > 0.9)
                 {
                     wallwalking = true;
                     GetComponent<Rigidbody>().useGravity = false;
@@ -130,6 +187,7 @@ public class PlayerMouse : MonoBehaviour
 
         wallwalking = false;
         grounded = false;
+        pushing = false;
     }
 
     public void Activate()
