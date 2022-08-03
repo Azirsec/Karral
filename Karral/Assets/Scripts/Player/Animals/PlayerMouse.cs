@@ -30,9 +30,6 @@ public class PlayerMouse : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //print(animator.GetCurrentAnimatorClipInfo(0)[0].clip.name);
-        print(Mathf.Abs(transform.GetComponent<Rigidbody>().velocity.x));
-
         float tempX = Input.GetAxisRaw("Horizontal");
         
         if (tempX > 0)
@@ -126,6 +123,8 @@ public class PlayerMouse : MonoBehaviour
 
     private void LateUpdate()
     {
+        //print(Mathf.Abs(transform.GetComponent<Rigidbody>().velocity.x));
+        print(animator.GetCurrentAnimatorClipInfo(0)[0].clip.name);
         animationStuff();
     }
 
@@ -135,8 +134,7 @@ public class PlayerMouse : MonoBehaviour
         animator.SetBool("isPushing", pushing);
         animator.SetFloat("xVel", Mathf.Abs(transform.GetComponent<Rigidbody>().velocity.x));
         animator.SetFloat("yVel", transform.GetComponent<Rigidbody>().velocity.y);
-
-        //animator.SetLayerWeight(1, 1);
+        
     }
 
     private void Jump(Vector3 jumpDirection)

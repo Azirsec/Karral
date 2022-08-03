@@ -29,7 +29,7 @@ public class PressurePlate : MonoBehaviour
             plate.transform.position = new Vector3(plate.transform.position.x, startHeight - 0.5f, plate.transform.position.z);
         }
 
-        plate.GetComponent<Rigidbody>().AddForce(Vector3.up, ForceMode.Force);
+        plate.GetComponent<Rigidbody>().AddForce(Vector3.up * 0.5f, ForceMode.Force);
 
         if (plate.transform.position.y < startHeight - 0.05f)
         {

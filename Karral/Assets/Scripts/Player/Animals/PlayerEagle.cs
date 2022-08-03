@@ -8,12 +8,14 @@ public class PlayerEagle : MonoBehaviour
     float moveDir;
 
     [SerializeField] GameObject mesh;
+    [SerializeField] Animator animator;
 
     [SerializeField] float maxSpeed;
     [SerializeField] float accelerationDuration;
     [SerializeField] float decelerationDuration;
     [SerializeField] float jumpSpeed;
     [SerializeField] int totalJumps;
+    [SerializeField] bool jumping;
 
     [SerializeField] float weight;
     [SerializeField] float height;
@@ -26,11 +28,22 @@ public class PlayerEagle : MonoBehaviour
 
     float jumptimer = 0f;
 
-    bool grounded = false;
+    [SerializeField] bool grounded = false;
 
     // Update is called once per frame
     void Update()
     {
+        float temp = Input.GetAxisRaw("Horizontal");
+        if (temp > 0)
+        {
+            mesh.transform.eulerAngles = new Vector3(mesh.transform.eulerAngles.x, 90, mesh.transform.eulerAngles.z);
+        }
+        else if (temp < 0)
+        {
+            mesh.transform.eulerAngles = new Vector3(mesh.transform.eulerAngles.x, -90, mesh.transform.eulerAngles.z);
+        }
+
+        
         GetComponent<BasicMovement>().basicMovement(maxSpeed, accelerationDuration, decelerationDuration, grounded);
         Jump();
         updateFeathers();
@@ -49,11 +62,30 @@ public class PlayerEagle : MonoBehaviour
                 }
 
                 GetComponent<Rigidbody>().velocity = new Vector3(GetComponent<Rigidbody>().velocity.x, jumpSpeed, 0);
+                jumping = true;
                 jumptimer = 0.3f;
                 grounded = false;
                 feathers[3].SetActive(false);
             }
         }
+        else
+        {
+            jumping = false;
+        }
+    }
+
+    private void LateUpdate()
+    {
+        print(animator.GetCurrentAnimatorClipInfo(0)[0].clip.name);
+        animationStuff();
+    }
+
+    void animationStuff()
+    {
+        animator.SetBool("grounded", grounded);
+        animator.SetBool("jumping", jumping);
+        animator.SetFloat("xVel", Mathf.Abs(transform.GetComponent<Rigidbody>().velocity.x));
+        animator.SetFloat("yVel", transform.GetComponent<Rigidbody>().velocity.y);
     }
 
     private void OnCollisionStay(Collision collision)
